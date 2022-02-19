@@ -8,3 +8,5 @@ function GuessSquare({ guessLetter }) {
         </div>
     )
 }
+
+export default GuessSquare;

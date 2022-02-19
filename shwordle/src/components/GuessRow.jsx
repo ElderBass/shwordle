@@ -1,13 +1,16 @@
 import React from 'react';
-import GuessBlock from './GuessBlock';
 import styles from './GuessRow.module.css';
+import GuessSquare from './GuessSquare';
 
 function GuessRow(props) {
     const { letters } = props;
     return (
         <div className={styles.guessRow}>
-            {letters.map}
-            <GuessBlock guessLetter={letters} />
+            <GuessSquare />
+            <GuessSquare />
+            <GuessSquare />
+            <GuessSquare />
+            <GuessSquare />
         </div>
     )
 }

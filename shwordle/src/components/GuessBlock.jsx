@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './GuessBlock.module.css';
 import GuessRow from './GuessRow';
+import styles from './GuessBlock.module.css';
 
 function GuessBlock() {
     return (
         <div className={styles.guessBlockContainer}>
+            <GuessRow />
             <GuessRow />
             <GuessRow />
             <GuessRow />

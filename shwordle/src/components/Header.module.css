@@ -1,5 +1,8 @@
 .headerContainer {
-    display: flex;
+    /* display: flex; */
     text-align: center;
+    font-size: 60px;
     border-bottom: solid 3px #1f1f1f;
+    width: 100%;
+    padding: 25px 0;
 }

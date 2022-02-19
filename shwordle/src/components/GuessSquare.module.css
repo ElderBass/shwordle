@@ -1,4 +1,6 @@
 .guessSquare {
     text-align: center;
-    border: solid 1px #1f1f1f;
+    padding: 30px;
+    margin: 3px;
+    border: solid 2px #1f1f1f;
 }
