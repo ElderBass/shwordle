@@ -3,7 +3,6 @@ import GuessRow from './GuessRow';
 import styles from './GuessBlock.module.css';
 
 function GuessBlock({ answerWord }) {
-
     return (
         <div className={styles.guessBlockContainer}>
             <GuessRow answerWord={answerWord} number={1} />

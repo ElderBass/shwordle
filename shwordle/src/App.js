@@ -1,9 +1,9 @@
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
 import words from 'an-array-of-english-words';
-import GuessBlock from "./components/GuessBlock";
+import GuessBlock from './components/GuessBlock';
 import Keyboard from "./components/Keyboard";
-import { GuessProvider } from "./store/GuessState";
+import { GuessProvider } from './store/GuessState';
 
 function App() {
   const wordArray = words.filter(word => word.length === 5).map(word => word.toUpperCase());

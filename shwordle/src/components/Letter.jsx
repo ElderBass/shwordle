@@ -41,7 +41,8 @@ function Letter(props) {
 
     function handleDeleteLetter() {
         if (currentGuess.length === 0) return;
-        const updatedGuess = currentGuess.pop();
+        const updatedGuess = currentGuess;
+        updatedGuess.pop();
         dispatch(GuessActions.deleteLetter(updatedGuess));
         console.log('\n updated state after deleting letter = ', state, '\n');
     }

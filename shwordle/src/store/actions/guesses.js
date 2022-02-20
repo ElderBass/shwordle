@@ -11,9 +11,9 @@ const deleteLetter = (updatedLetters) => ({
 });
 
 const GUESS_WORD = 'GUESS_WORD';
-const guessWord = (word) => ({
+const guessWord = (comparisonResults) => ({
     type: GUESS_WORD,
-    payload: word,
+    payload: comparisonResults,
 });
 
 export {

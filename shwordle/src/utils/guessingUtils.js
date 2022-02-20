@@ -11,8 +11,6 @@ export function letterIsInCorrectSpot(guessLetter, answerLetter) {
 }
 
 export function compareGuessWithAnswer(guess, answer) {
-    console.log('\n guess in compare fxn = ', guess, '\n');
-    console.log('\n answer in compare guess = ', answer, '\n');
     const comparisonResults = [];
     const answerArr = answer.split('');
     for (let i = 0; i < answerArr.length; i++) {
