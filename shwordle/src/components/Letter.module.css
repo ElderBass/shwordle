@@ -5,3 +5,20 @@
     margin: 5px;
     min-width: 60px;
 }
+
+.letter:hover {
+    cursor: pointer;
+    background-color: rgb(197, 197, 197);
+}
+
+.inCorrectSpot {
+    background-color: green;
+}
+
+.isInWord {
+    background-color: yellow;
+}
+
+.notInWord {
+    background-color: gray;
+}

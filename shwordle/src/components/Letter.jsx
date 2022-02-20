@@ -1,18 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import { guessWordHandler } from '../utils/guessingUtils';
-import { handleDeleteLetter } from '../utils/keyboardUtils';
+import { useGuessContext } from '../store/GuessState';
+import * as GuessActions from '../store/actions/guesses';
+import { compareGuessWithAnswer } from '../utils/guessingUtils';
 import styles from './Letter.module.css';
 
-function Letter({ letter }) {
-    const [classes, setClasses] = useState(styles.letter);
+function Letter(props) {
+    const { value, inWord, correctSpot, answerWord } = props;
+    const [classes, setClasses] = useState('');
+    const [state, dispatch] = useGuessContext();
+    const { currentGuess, guessedLetters } = state;
+
+    useEffect(() => {
+        let classNames = styles.letter;
+        if (inWord) {
+            if (correctSpot) {
+                classNames += ` ${styles.inCorrectSpot}`;
+            } else {
+                classNames += ` ${styles.isInWord}`;
+            }
+        } else {
+            if (guessedLetters.includes(value)) {
+                classNames += ` ${styles.notInWord}`;
+            } 
+        }
+        setClasses(classNames);
+    }, [inWord, correctSpot, guessedLetters, value]);
+
 
     function addLetterToGuess() {
-        console.log('you are guessing ', letter, ' okay bro');
+        if (currentGuess.length === 5) {
+            alert('You can\'t guess any more letters, bro.');
+            return;
+        }
+        const guess = currentGuess;
+
+        guess.push(value);
+        dispatch(GuessActions.addLetter(guess));
+        console.log('\n updated state after add letter to guess = ', state, '\n');
+    }
+
+    function handleDeleteLetter() {
+        if (currentGuess.length === 0) return;
+        const updatedGuess = currentGuess.pop();
+        dispatch(GuessActions.deleteLetter(updatedGuess));
+        console.log('\n updated state after deleting letter = ', state, '\n');
+    }
+
+    function guessWordHandler() {
+        const comparisonResults = compareGuessWithAnswer(currentGuess, answerWord);
+        dispatch(GuessActions.guessWord(comparisonResults));
+        console.log('\n updated state after guessing word = ', state, '\n');
+
     }
 
     function getOnclickFunction(e) {
         let onClickFunction;
-        switch (letter) {
+        switch (value) {
             case 'Delete':
                 onClickFunction = handleDeleteLetter;
                 break;
@@ -26,12 +69,9 @@ function Letter({ letter }) {
         onClickFunction(e);
     }
 
-    // useEffect(() => {
-
-    // }, [letter]);
     return (
-        <div className={styles.letter} onClick={getOnclickFunction} value={letter}>
-            {letter}
+        <div className={classes} onClick={getOnclickFunction}>
+            {value}
         </div>
     )
 };

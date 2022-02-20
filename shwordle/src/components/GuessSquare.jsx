@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './GuessSquare.module.css';
 
-function GuessSquare({ guessLetter }) {
+function GuessSquare({ letter }) {
     return (
         <div className={styles.guessSquare}>
-            {guessLetter}
+            {letter}
         </div>
     )
 }
