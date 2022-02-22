@@ -7,3 +7,15 @@
     width: 60px;
     height: 60px;
 }
+
+.inCorrectSpot {
+    background-color: green;
+}
+
+.isInWord {
+    background-color: yellow;
+}
+
+.notInWord {
+    background-color: gray;
+}

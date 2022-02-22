@@ -25,7 +25,10 @@ const guessReducer = (state = INITIAL_GUESS_STATE, { type, payload }) => {
         case GuessActions.GUESS_WORD:
             const updatedGuessedLetters = [...state.guessedLetters, ...state.currentGuess];
             const guessObj = { guessNumber: state.guessNumber, guess: state.currentGuess };
+            console.log('\n guessObj in guess word reducer = ', guessObj, '\n');
             const updatedPreviousGuesses = [...state.previousGuesses, guessObj];
+            console.log('\n updatedPreviousGuesses in guess word reducer = ', updatedPreviousGuesses, '\n');
+
             const updatedLetters = updateLettersArray(state.letters, payload);
             console.log('\n updated letters in guessReducer = ', updatedLetters, '\n');
             const newState = {
