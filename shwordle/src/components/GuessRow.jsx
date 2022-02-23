@@ -9,25 +9,13 @@ function GuessRow(props) {
     const { currentGuess, guessNumber, previousGuesses } = state;
     const isCurrentRow = rowNumber === guessNumber;
 
-    const [isInWrongSpot, setIsInWrongSpot] = useState(false);
-
     function getGuessLetter(index) {
         let result;
-        if (previousGuesses.length) {
+        if (previousGuesses.length > 0) {
             for (let i = 0; i < previousGuesses.length; i++) {
                 if (previousGuesses[i].guessNumber === rowNumber) {
-                    const prevRowGuess = previousGuesses[i - 0].guess;
-                    const currentRowLetters = previousGuesses[i].guess;
-                    const currentLetter = currentRowLetters[index];
-                    const prevRowLetterIndex = prevRowGuess.indexOf(currentLetter);
-                    console.log('\n are we hitting this? inside prevGuessNum = rowNum \n')
-                    if (index !== prevRowLetterIndex) {
-                        console.log('\n are we hitting this? inside i!== index check \n')
-                        setIsInWrongSpot(true);
-                    }
-                    return currentLetter;                 
-                } else {
-                    result = currentGuess[index] && isCurrentRow ? currentGuess[index] : '';
+                    const currentLetter = previousGuesses[i].guess[index];
+                    result = currentLetter;              
                 }
             }
         } else {
@@ -38,11 +26,11 @@ function GuessRow(props) {
     }
     return (
         <div className={styles.guessRow}>
-            <GuessSquare letter={getGuessLetter(0)} isInWrongSpot={isInWrongSpot} rowNumber={rowNumber} />
-            <GuessSquare letter={getGuessLetter(1)} isInWrongSpot={isInWrongSpot} rowNumber={rowNumber} />
-            <GuessSquare letter={getGuessLetter(2)} isInWrongSpot={isInWrongSpot} rowNumber={rowNumber} />
-            <GuessSquare letter={getGuessLetter(3)} isInWrongSpot={isInWrongSpot} rowNumber={rowNumber} />
-            <GuessSquare letter={getGuessLetter(4)} isInWrongSpot={isInWrongSpot} rowNumber={rowNumber} />
+            <GuessSquare letter={getGuessLetter(0)} index={0} rowNumber={rowNumber} />
+            <GuessSquare letter={getGuessLetter(1)} index={1} rowNumber={rowNumber} />
+            <GuessSquare letter={getGuessLetter(2)} index={2} rowNumber={rowNumber} />
+            <GuessSquare letter={getGuessLetter(3)} index={3} rowNumber={rowNumber} />
+            <GuessSquare letter={getGuessLetter(4)} index={4} rowNumber={rowNumber} />
         </div>
     )
 }

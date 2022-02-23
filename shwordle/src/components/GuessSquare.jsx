@@ -3,8 +3,7 @@ import { useGuessContext } from '../store/GuessState';
 import { getClassNames } from '../utils/letterColorUtils';
 import styles from './GuessSquare.module.css';
 
-function GuessSquare({ letter = '', rowNumber, isInWrongSpot }) {
-    console.log('\n letter in guess square = ', letter, '\n');
+function GuessSquare({ letter = '', rowNumber, index }) {
     const [state, dispatch] = useGuessContext();
     const { letters, previousGuesses, guessNumber } = state;
     const isPreviousGuess = previousGuesses.filter(guess => guess.guessNumber === rowNumber).length === 1;
@@ -22,19 +21,19 @@ function GuessSquare({ letter = '', rowNumber, isInWrongSpot }) {
         const guessLetter = previousGuessLetters.length && previousGuessLetters.filter(letter => letter === letterObject.value); 
 
         if (guessLetter && guessLetter.length && !hasBeenGuessed && guessNumber !== rowNumber) {
+            const prevRowLetterIndex = guessNumber > 1 ? previousGuesses[guessNumber - 2].guess.indexOf(guessLetter) : -1;
             let letterPayload;
-            if (isInWrongSpot) {
-                console.log('\n in wrong spot fuck me \n');
-                console.log(`\n rowNumber = ${rowNumber}, letter = ${letter}`);
+            if (prevRowLetterIndex !== -1 && index !== prevRowLetterIndex) {
                 letterPayload = { value: letterObject.value, isInWord: true, inCorrectSpot: false };
-            } else {
+            }
+            else {
                 letterPayload = letterObject;
             }
             setClasses(getClassNames(styles, letterPayload));
             setHasBeenGuessed(true);
         }
         
-    }, [letters, letter, letterObject, rowNumber, hasBeenGuessed, previousGuesses])
+    }, [letters, letter, letterObject, index, guessNumber, rowNumber, hasBeenGuessed, previousGuesses]);
 
 
     return (
