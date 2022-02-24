@@ -11,17 +11,13 @@ function GuessRow(props) {
 
     function getGuessLetter(index) {
         let result;
-        if (previousGuesses.length > 0) {
-            for (let i = 0; i < previousGuesses.length; i++) {
-                if (previousGuesses[i].guessNumber === rowNumber) {
-                    const currentLetter = previousGuesses[i].guess[index];
-                    result = currentLetter;              
-                }
-            }
+        if (guessNumber > rowNumber) {
+            const previousGuess = previousGuesses.filter(guess => guess.guessNumber === rowNumber);
+            const letter = previousGuess[0] && previousGuess[0].guess[index];
+            result = letter;              
         } else {
             result = currentGuess[index] && isCurrentRow ? currentGuess[index] : '';
         }
-        
         return result || '';
     }
     return (
