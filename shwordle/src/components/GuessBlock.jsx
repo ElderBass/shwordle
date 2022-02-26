@@ -5,12 +5,13 @@ import styles from './GuessBlock.module.css';
 function GuessBlock({ answerWord }) {
     return (
         <div className={styles.guessBlockContainer}>
-            <GuessRow answerWord={answerWord} rowNumber={1} />
-            <GuessRow answerWord={answerWord} rowNumber={2} />
-            <GuessRow answerWord={answerWord} rowNumber={3} />
-            <GuessRow answerWord={answerWord} rowNumber={4} />
-            <GuessRow answerWord={answerWord} rowNumber={5} />
-            <GuessRow answerWord={answerWord} rowNumber={6} />
+            {[1, 2, 3, 4, 5, 6].map(rowNumber => (
+                <GuessRow
+                    key={rowNumber}
+                    answerWord={answerWord}
+                    rowNumber={rowNumber}
+                />
+            ))}
         </div>
     );
 }

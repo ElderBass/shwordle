@@ -1,5 +1,5 @@
 import * as GuessActions from '../actions/guesses';
-import { letters } from '../../consts';
+import { letters } from '../../consts/letters';
 import updateLettersArray from '../../utils/updateLettersArray';
 
 export const INITIAL_GUESS_STATE = {
@@ -8,6 +8,8 @@ export const INITIAL_GUESS_STATE = {
     previousGuesses: [],
     guessedLetters: [],
     letters,
+    isGameOver: false,
+    isWinningGame: false,
 };
 
 const guessReducer = (state = INITIAL_GUESS_STATE, { type, payload }) => {
@@ -23,23 +25,24 @@ const guessReducer = (state = INITIAL_GUESS_STATE, { type, payload }) => {
                 currentGuess: payload,
             };
         case GuessActions.GUESS_WORD:
-            const updatedGuessedLetters = [...state.guessedLetters, ...state.currentGuess];
             const guessObj = { guessNumber: state.guessNumber, guess: state.currentGuess };
-            console.log('\n guessObj in guess word reducer = ', guessObj, '\n');
-            const updatedPreviousGuesses = [...state.previousGuesses, guessObj];
-            console.log('\n updatedPreviousGuesses in guess word reducer = ', updatedPreviousGuesses, '\n');
-
-            const updatedLetters = updateLettersArray(state.letters, payload);
-            console.log('\n updated letters in guessReducer = ', updatedLetters, '\n');
             const newState = {
+                ...state,
                 guessNumber: state.guessNumber + 1,
-                guessedLetters: updatedGuessedLetters,
-                previousGuesses: updatedPreviousGuesses,
+                guessedLetters: [...state.guessedLetters, ...state.currentGuess],
+                previousGuesses: [...state.previousGuesses, guessObj],
                 currentGuess: [],
-                letters: updatedLetters,
+                letters: updateLettersArray(state.letters, payload),
             }
             console.log('\n state after guess word action = ', newState, '\n');
             return newState;
+        case GuessActions.END_GAME:
+            return {
+                ...state,
+                letters: updateLettersArray(state.letters, payload.comparisonResults),
+                isGameOver: true,
+                isWinningGame: payload.isWin,
+            };
         default: return state;
     }
 };

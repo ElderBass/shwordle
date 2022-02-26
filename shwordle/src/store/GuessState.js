@@ -6,7 +6,6 @@ const { Provider } = GuessContext;
 
 const GuessProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useReducer(guessReducer, INITIAL_GUESS_STATE);
-    
     return <Provider value={[state, dispatch]} {...props} />;
 };
 

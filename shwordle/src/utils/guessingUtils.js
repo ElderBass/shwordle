@@ -11,6 +11,7 @@ export function letterIsInCorrectSpot(guessLetter, answerLetter) {
 }
 
 export function compareGuessWithAnswer(guess, answer) {
+    console.log('\n ansewr in compareGuessWithAnswer = ', answer, '\n');
     const comparisonResults = [];
     const answerArr = answer.split('');
     for (let i = 0; i < answerArr.length; i++) {
@@ -38,4 +39,10 @@ export function compareGuessWithAnswer(guess, answer) {
     }
     console.log('\n comparison results = ', comparisonResults, '\n');
     return comparisonResults;
+}
+
+export function isWinningGuess(guess, answer) {
+    console.log('\n guess in isWinningGuess ? ', guess, '\n');
+    console.log('\n asnwer in isWinningGuess ? ', answer, '\n');
+    return guess.filter((guess, i) => guess.value === answer[i]).length === 5;
 }

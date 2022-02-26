@@ -16,6 +16,12 @@ const guessWord = (comparisonResults) => ({
     payload: comparisonResults,
 });
 
+const END_GAME = 'END_GAME';
+const endGame = (letters) => ({
+    type: END_GAME,
+    payload: letters,
+});
+
 export {
     ADD_LETTER,
     addLetter,
@@ -23,4 +29,6 @@ export {
     deleteLetter,
     GUESS_WORD,
     guessWord,
+    END_GAME,
+    endGame,
 };

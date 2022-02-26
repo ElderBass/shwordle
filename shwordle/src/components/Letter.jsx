@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useGuessContext } from '../store/GuessState';
 import * as GuessActions from '../store/actions/guesses';
-import { compareGuessWithAnswer } from '../utils/guessingUtils';
+import { compareGuessWithAnswer, isWinningGuess } from '../utils/guessingUtils';
 import styles from './Letter.module.css';
+import { getEndGameAlertMessage, setPlayerStats } from '../utils/gameOverUtils';
 
 function Letter(props) {
     const { value, inWord, correctSpot, answerWord } = props;
     const [classes, setClasses] = useState('');
     const [state, dispatch] = useGuessContext();
-    const { currentGuess, guessedLetters } = state;
+    const { currentGuess, guessedLetters, guessNumber, isGameOver } = state;
+
+    const LOSING_GAME_MESSAGE = 'Lol sucks to suck';
 
     useEffect(() => {
         let classNames = styles.letter;
@@ -48,13 +51,22 @@ function Letter(props) {
     }
 
     function guessWordHandler() {
+        if (currentGuess.length < 5) return;
         const comparisonResults = compareGuessWithAnswer(currentGuess, answerWord);
         dispatch(GuessActions.guessWord(comparisonResults));
+        const isWin = isWinningGuess(comparisonResults, answerWord);
+        if (isWin || guessNumber === 6) {
+            const endMessage = isWin ? getEndGameAlertMessage(guessNumber) : LOSING_GAME_MESSAGE;
+            dispatch(GuessActions.endGame({ isWin, comparisonResults }));
+            // TODO: Turn this into a modal that gets dispatch on SHOW_STATS action ?
+            alert(endMessage);
+            setPlayerStats({ isWin, numberOfGuesses: guessNumber, answerWord });
+        }
         console.log('\n updated state after guessing word = ', state, '\n');
-
     }
 
     function getOnclickFunction(e) {
+        if (isGameOver) return;
         let onClickFunction;
         switch (value) {
             case 'Delete':
