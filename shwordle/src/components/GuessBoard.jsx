@@ -1,6 +1,6 @@
 import React from 'react';
 import GuessRow from './GuessRow';
-import styles from './GuessBlock.module.css';
+import styles from './GuessBoard.module.css';
 
 function GuessBlock({ answerWord }) {
     return (

@@ -1,14 +1,15 @@
 .letter {
     text-align: center;
-    padding: 20px;
-    border: solid 2px #1f1f1f;
+    padding: 20px 15px;
+    border: solid 2px #6f05b6;
     margin: 5px;
-    min-width: 60px;
+    min-width: 50px;
+    border-radius: 5px;
 }
 
 .letter:hover {
     cursor: pointer;
-    background-color: rgb(197, 197, 197);
+    background-color: #6f05b6;
 }
 
 .inCorrectSpot {
