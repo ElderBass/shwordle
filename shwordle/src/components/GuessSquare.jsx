@@ -1,39 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useGuessContext } from '../store/GuessState';
+import { getLetterCount, getPreviousGuessLetters, getTimesLetterIsInCorrectSpotAfterIndex } from '../utils/guessSquareUtils';
 import styles from './GuessSquare.module.css';
 
 function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
     const [state, dispatch] = useGuessContext();
-    const { previousGuesses, guessNumber, currentGuess, isWinningGame, letters } = state;
+    const { previousGuesses, guessNumber, currentGuess, isWinningGame } = state;
     const isPreviousRow = rowNumber === guessNumber - 1;
-    const letterObject = letters.filter(lettr => lettr.value === letter)[0];
 
     const [classes, setClasses] = useState(null);
 
     useEffect(() => {
         if (previousGuesses.length === 0 || !isPreviousRow) return;
-        
+
         let classNames = styles.guessSquare;
         if (isWinningGame) {
             classNames += ` ${styles.inCorrectSpot}`;
         } else {
-            const previousGuessLetters = previousGuesses.filter(guess => guess.guessNumber === rowNumber)[0].guess;
+            const previousGuessLetters = getPreviousGuessLetters(previousGuesses, rowNumber);
             const answerWordArr = answerWord.split('');
 
             if (answerWordArr.includes(letter)) {
-                let indecesOfLetterInAnswer = [];
-                answerWordArr.forEach((lettr, i) => {
-                    if (lettr === letter) {
-                        indecesOfLetterInAnswer.push({ letter: lettr, index: i });
-                    }
-                });
-                const timesLetterIsInAnswer = indecesOfLetterInAnswer.length;
-                const timesLetterIsInPreviousGuess = previousGuessLetters.filter(lettr => lettr === letter).length;
                 if (answerWord[index] === letter) {
                     classNames += ` ${styles.inCorrectSpot}`;
-                } else if (timesLetterIsInPreviousGuess > timesLetterIsInAnswer) {
-                    if (letterObject.inCorrectSpot) {
-                        classNames += ` ${styles.notInWord}`;
+                } else {
+                    const timesLetterIsInAnswer = getLetterCount(answerWordArr, letter);
+                    const timesLetterIsInPreviousGuess = getLetterCount(previousGuessLetters, letter);
+
+                    const timesLetterIsInCorrectSpotAfterThisIndex = 
+                        getTimesLetterIsInCorrectSpotAfterIndex(previousGuessLetters, answerWordArr, letter, index);
+
+                    if (timesLetterIsInAnswer >= timesLetterIsInPreviousGuess) {
+                        classNames += ` ${styles.isInWord}`;
+                    } else if (timesLetterIsInPreviousGuess > timesLetterIsInAnswer) {
+                        if (
+                            timesLetterIsInPreviousGuess >
+                            timesLetterIsInCorrectSpotAfterThisIndex
+                        ) {
+                            classNames += ` ${styles.notInWord}`;
+                        }
                     } else {
                         classNames += ` ${styles.isInWord}`;
                     }
@@ -43,13 +48,18 @@ function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
             }
         }
         setClasses(classNames);
-    }, [previousGuesses, isPreviousRow, answerWord, letter, index, rowNumber, currentGuess, isWinningGame]);
+    }, [
+        previousGuesses,
+        isPreviousRow,
+        answerWord,
+        letter,
+        index,
+        rowNumber,
+        currentGuess,
+        isWinningGame,
+    ]);
 
-    return (
-        <div className={classes || styles.guessSquare}>
-            {letter}
-        </div>
-    )
+    return <div className={classes || styles.guessSquare}>{letter}</div>;
 }
 
 export default GuessSquare;

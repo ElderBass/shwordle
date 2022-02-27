@@ -32,7 +32,7 @@ const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
 }
 
 export function getEndGameAlertMessage(guessNumber) {
-    let message = 'GAME OVER \n';
+    let message = 'SHWORDLE!\n';
     switch (guessNumber) {
         case 1:
             message = 'Hacker, reporting.';
