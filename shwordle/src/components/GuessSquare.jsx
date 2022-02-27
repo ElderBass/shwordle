@@ -4,8 +4,9 @@ import styles from './GuessSquare.module.css';
 
 function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
     const [state, dispatch] = useGuessContext();
-    const { previousGuesses, guessNumber, currentGuess, isWinningGame } = state;
+    const { previousGuesses, guessNumber, currentGuess, isWinningGame, letters } = state;
     const isPreviousRow = rowNumber === guessNumber - 1;
+    const letterObject = letters.filter(lettr => lettr.value === letter)[0];
 
     const [classes, setClasses] = useState(null);
 
@@ -31,10 +32,12 @@ function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
                 if (answerWord[index] === letter) {
                     classNames += ` ${styles.inCorrectSpot}`;
                 } else if (timesLetterIsInPreviousGuess > timesLetterIsInAnswer) {
+                    if (letterObject.inCorrectSpot) {
                         classNames += ` ${styles.notInWord}`;
                     } else {
                         classNames += ` ${styles.isInWord}`;
                     }
+                }
             } else {
                 classNames += ` ${styles.notInWord}`;
             }
