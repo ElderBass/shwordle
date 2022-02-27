@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Definitely_Not_A_Wordle_Clone/static/css/main.18334a52.css",
+    "main.js": "/Definitely_Not_A_Wordle_Clone/static/js/main.0b559dbf.js",
+    "index.html": "/Definitely_Not_A_Wordle_Clone/index.html",
+    "main.18334a52.css.map": "/Definitely_Not_A_Wordle_Clone/static/css/main.18334a52.css.map",
+    "main.0b559dbf.js.map": "/Definitely_Not_A_Wordle_Clone/static/js/main.0b559dbf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.18334a52.css",
+    "static/js/main.0b559dbf.js"
+  ]
+}
