@@ -1,4 +1,5 @@
 .letter {
+    font-size: 20px;
     text-align: center;
     padding: 20px 15px;
     border: solid 2px #6f05b6;
@@ -13,13 +14,13 @@
 }
 
 .inCorrectSpot {
-    background-color: green;
+    background-color: rgb(10, 165, 10);
 }
 
 .isInWord {
-    background-color: yellow;
+    background-color: rgb(136, 117, 32);
 }
 
 .notInWord {
-    background-color: gray;
+    background-color: rgb(24, 23, 23);
 }
