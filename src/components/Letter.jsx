@@ -59,7 +59,7 @@ function Letter(props) {
             setPlayerStats({ isWin, numberOfGuesses: guessNumber, answerWord });
 
             // TODO: Turn this into a modal that gets dispatch on SHOW_STATS action ?
-            const endMessage = isWin ? getEndGameAlertMessage(guessNumber) : LOSING_GAME_MESSAGE;
+            const endMessage = isWin ? getEndGameAlertMessage(guessNumber, answerWord) : LOSING_GAME_MESSAGE;
             alert(endMessage);
         }
         console.log('\n updated state after guessing word = ', state, '\n');

@@ -31,26 +31,26 @@ const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
     localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(updatedStats));
 }
 
-export function getEndGameAlertMessage(guessNumber) {
-    let message = 'SHWORDLE!\n';
+export function getEndGameAlertMessage(guessNumber, answerWord) {
+    let message = `SHWORDLE!\n The answer was ${answerWord.toUpperCase()}\n`;
     switch (guessNumber) {
         case 1:
-            message = 'Hacker, reporting.';
+            message += 'Hacker, reporting.';
             break;
         case 2:
-            message = "Git gud, homie";
+            message += "Git gud, homie";
             break;
         case 3:
-            message = 'Git gud, homie';
+            message += 'Git gud, homie';
             break;
         case 4:
-            message = 'Git gud, homie';
+            message += 'Git gud, homie';
             break;
         case 5:
-            message = 'Sweaty one. Git gud, homie';
+            message += 'Sweaty one. Git gud, homie';
             break;
         case 6:
-            message = 'You made ME sweat, holy.';
+            message += 'You made ME sweat, holy.';
             break;
         default:
             break;
