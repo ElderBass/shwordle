@@ -1,0 +1,17 @@
+.deleteBtn {
+  flex: 1 0 40%;
+  font-size: 20px;
+  text-align: center;
+  padding: 18px 15px;
+  border: solid 2px #6f05b6;
+  margin: 5px;
+  min-width: 70px;
+  border-radius: 8px;
+}
+
+.deleteBtn:hover {
+  border: solid 2px #ba03c0;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #ba03c0;
+}

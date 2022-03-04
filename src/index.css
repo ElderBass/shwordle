@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
 }
 
 .example::-webkit-scrollbar {
