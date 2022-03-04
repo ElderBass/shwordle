@@ -1,6 +1,5 @@
 import Header from './components/Header';
 import { useEffect, useState } from 'react';
-import words from 'an-array-of-english-words';
 import wordListJson from 'word-list-json';
 import randomWords from 'random-words';
 import GuessBlock from './components/GuessBoard';
