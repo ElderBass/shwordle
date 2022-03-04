@@ -1,11 +1,10 @@
 .deleteBtn {
-  flex: 1 0 40%;
   font-size: 20px;
   text-align: center;
   padding: 18px 15px;
   border: solid 2px #6f05b6;
   margin: 5px;
-  min-width: 70px;
+  min-width: 80px;
   border-radius: 8px;
 }
 

@@ -1,10 +1,8 @@
 .keyboardContainer {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 35%;
-    height: 90%;
+    width: 58%;
 }
 
 .lettersContainer {
@@ -12,5 +10,5 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 60%;
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useGuessContext } from '../store/GuessState';
 import Letter from './Letter';
+import EnterButton from './EnterButton';
+import DeleteButton from './DeleteButton';
 import Toolbar from './Toolbar';
 import styles from './Keyboard.module.css';
 
@@ -10,6 +12,7 @@ function Keyboard({ answerWord, wordPool }) {
 
     return (
         <div className={styles.keyboardContainer}>
+            <EnterButton answerWord={answerWord} wordPool={wordPool} />
             <div className={styles.lettersContainer}>
                 {letters.map(letter => (
                     <Letter
@@ -21,7 +24,8 @@ function Keyboard({ answerWord, wordPool }) {
                     />
                 ))}
             </div>
-            <Toolbar answerWord={answerWord} wordPool={wordPool} />
+            <DeleteButton />
+            {/* <Toolbar answerWord={answerWord} wordPool={wordPool} /> */}
         </div>
     );
 }
