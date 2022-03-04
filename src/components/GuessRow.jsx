@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useGuessContext } from '../store/GuessState';
 import GuessSquare from './GuessSquare';
 import styles from './GuessRow.module.css';
 
 function GuessRow(props) {
     const { rowNumber, answerWord } = props;
-    const [state, dispatch] = useGuessContext();
+    const [state] = useGuessContext();
     const { currentGuess, guessNumber, previousGuesses } = state;
     const isCurrentRow = rowNumber === guessNumber;
 
