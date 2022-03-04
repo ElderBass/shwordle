@@ -1,6 +1,8 @@
 import Header from './components/Header';
 import { useEffect, useState } from 'react';
 import words from 'an-array-of-english-words';
+import wordListJson from 'word-list-json';
+import randomWords from 'random-words';
 import GuessBlock from './components/GuessBoard';
 import Keyboard from './components/Keyboard';
 import { GuessProvider } from './store/GuessState';
@@ -8,6 +10,26 @@ import { STATS_STORAGE_KEY } from './consts';
 
 function App() {
     const [answerWord, setAnswerWord] = useState('');
+    const [wordPool, setWordPool] = useState([]);
+
+    function generateAnswerWord(previousAnswers) {
+        const randomWordsArr = randomWords({ maxLength: 5, exactly: 200 }).filter(word => word.length === 5);
+        let result;
+        let answerWord = randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
+        if (previousAnswers.includes(answerWord)) {
+            answerWord = randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
+            while (previousAnswers.includes(answerWord)) {
+                answerWord = randomWords[Math.floor(Math.random() * randomWords.length)];
+                if (!previousAnswers.includes(answerWord)) {
+                    result = answerWord;
+                    break;
+                }
+            };
+        } else {
+            result = answerWord;
+        }
+        return result;
+    }
 
     useEffect(() => {
         if (!localStorage.getItem(STATS_STORAGE_KEY)) {
@@ -26,12 +48,11 @@ function App() {
         }
         const previousAnswers = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY)).previousAnswers;
 
-        const wordArray = words
-            .filter((word, i) => word.length === 5 && !previousAnswers.includes(word))
+        const wordList = wordListJson.filter(word => word.length === 5 && !previousAnswers.includes(word))
             .map((word) => word.toUpperCase());
+        setWordPool(wordList);
 
-        const answerWord = wordArray[Math.floor(Math.random() * wordArray.length)];
-        console.log('\n answer word = ', answerWord, '\n');
+        const answerWord = generateAnswerWord(previousAnswers);
         setAnswerWord(answerWord);
     }, []);
 
@@ -40,7 +61,7 @@ function App() {
             <Header />
             <GuessProvider>
                 <GuessBlock answerWord={answerWord} />
-                <Keyboard answerWord={answerWord} />
+                <Keyboard answerWord={answerWord} wordPool={wordPool} />
             </GuessProvider>
         </div>
     );
