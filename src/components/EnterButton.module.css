@@ -1,0 +1,29 @@
+.enterBtn {
+    flex: 1 0 40%;
+    font-size: 20px;
+    text-align: center;
+    padding: 18px 15px;
+    border: solid 2px #6f05b6;
+    margin: 5px;
+    min-width: 70px;
+    border-radius: 8px;
+}
+
+.fullLetters {
+    background-color: #ec3bf2;
+}
+
+.disabled {
+    opacity: 60%;
+}
+
+.disabled:hover {
+  opacity: 60%;
+}
+
+.enterBtn:hover {
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  background-color: rgb(10, 165, 10);
+}

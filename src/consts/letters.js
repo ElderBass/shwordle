@@ -19,20 +19,10 @@ export const letters = [
   { value: "K", isInWord: false, inCorrectSpot: false },
   { value: "L", isInWord: false, inCorrectSpot: false },
   { value: "Z", isInWord: false, inCorrectSpot: false },
-  {
-    value: "Enter",
-    isInWord: false,
-    inCorrectSpot: false,
-  },
   { value: "X", isInWord: false, inCorrectSpot: false },
   { value: "C", isInWord: false, inCorrectSpot: false },
   { value: "V", isInWord: false, inCorrectSpot: false },
   { value: "B", isInWord: false, inCorrectSpot: false },
   { value: "N", isInWord: false, inCorrectSpot: false },
   { value: "M", isInWord: false, inCorrectSpot: false },
-  {
-    value: "Delete",
-    isInWord: false,
-    inCorrectSpot: false,
-  },
 ];

@@ -51,7 +51,6 @@ function App() {
         const wordList = wordListJson.filter(word => word.length === 5 && !previousAnswers.includes(word))
             .map((word) => word.toUpperCase());
         setWordPool(wordList);
-
         const answerWord = generateAnswerWord(previousAnswers);
         setAnswerWord(answerWord);
     }, []);

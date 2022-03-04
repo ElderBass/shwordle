@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 function Header() {
     return (
         <div className={styles.headerContainer}>
-            Shwordle
+            SHWORDLE
         </div>
     )
 }

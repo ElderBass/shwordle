@@ -1,10 +1,9 @@
 .letter {
-    font-size: 20px;
-    text-align: center;
-    padding: 18px 15px;
+    font-size: 16px;
+    padding: 18px 10px 18px 12px;
     border: solid 2px #6f05b6;
     margin: 5px;
-    min-width: 50px;
+    width: 40px;
     border-radius: 5px;
 }
 
