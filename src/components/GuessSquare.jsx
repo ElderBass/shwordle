@@ -4,7 +4,7 @@ import { getLetterCount, getPreviousGuessLetters, getTimesLetterIsInCorrectSpotA
 import styles from './GuessSquare.module.css';
 
 function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
-    const [state, dispatch] = useGuessContext();
+    const [state] = useGuessContext();
     const { previousGuesses, guessNumber, currentGuess, isWinningGame } = state;
     const isPreviousRow = rowNumber === guessNumber - 1;
 

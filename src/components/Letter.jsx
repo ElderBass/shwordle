@@ -4,10 +4,10 @@ import * as GuessActions from '../store/actions/guesses';
 import styles from './Letter.module.css';
 
 function Letter(props) {
-    const { value, inWord, correctSpot, answerWord } = props;
+    const { value, inWord, correctSpot } = props;
     const [classes, setClasses] = useState('');
     const [state, dispatch] = useGuessContext();
-    const { currentGuess, guessedLetters, guessNumber, isGameOver } = state;
+    const { currentGuess, guessedLetters, isGameOver } = state;
 
     useEffect(() => {
         let classNames = styles.letter;
@@ -27,6 +27,7 @@ function Letter(props) {
 
 
     function addLetterToGuess() {
+        if (isGameOver) return;
         if (currentGuess.length === 5) {
             alert('You can\'t guess any more letters, bro.');
             return;

@@ -1,13 +1,12 @@
 {
   "name": "shwordle",
-  "version": "0.1.0",
+  "version": "2.1",
   "private": true,
   "homepage": "https://elderbass.github.io/Definitely_Not_A_Wordle_Clone/",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
-    "an-array-of-english-words": "2.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
@@ -40,11 +39,8 @@
     ]
   },
   "devDependencies": {
-    "fs": "0.0.1-security",
     "gh-pages": "3.2.3",
-    "path": "0.12.7",
     "random-words": "^1.1.2",
-    "word-list": "3.1.0",
     "word-list-json": "^0.2.0"
   }
 }
