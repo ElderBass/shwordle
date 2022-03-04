@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useGuessContext } from '../store/GuessState';
 import * as GuessActions from '../store/actions/guesses';
 import { LOSING_GAME_MESSAGE } from '../consts';
@@ -9,14 +9,6 @@ import styles from './EnterButton.module.css';
 function EnterButton({ answerWord, wordPool }) {
   const [state, dispatch] = useGuessContext();
   const { currentGuess, guessNumber } = state;
-
-  const [disabledState, setDisabledState] = useState(true);
-
-  useEffect(() => {
-    if (currentGuess.length === 5) {
-      setDisabledState(false);
-    }
-  }, [currentGuess]);
 
   function guessWordHandler() {
     const currentGuessWord = currentGuess.join('');

@@ -5,7 +5,7 @@ import Toolbar from './Toolbar';
 import styles from './Keyboard.module.css';
 
 function Keyboard({ answerWord, wordPool }) {
-    const [state, dispatch] = useGuessContext();
+    const [state] = useGuessContext();
     const { letters } = state;
 
     return (
