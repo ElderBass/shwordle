@@ -4,8 +4,9 @@ import wordListJson from 'word-list-json';
 import randomWords from 'random-words';
 import GuessBlock from './components/GuessBoard';
 import Keyboard from './components/Keyboard';
-import { GuessProvider } from './store/GuessState';
+import { GameProvider } from './store/GameState';
 import { STATS_STORAGE_KEY } from './consts';
+import StatsModal from './components/StatsModal';
 
 function App() {
     const [answerWord, setAnswerWord] = useState('');
@@ -56,11 +57,12 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
-            <GuessProvider>
+            <GameProvider>
+                <StatsModal />
+                <Header />
                 <GuessBlock answerWord={answerWord} />
                 <Keyboard answerWord={answerWord} wordPool={wordPool} />
-            </GuessProvider>
+            </GameProvider>
         </div>
     );
 }

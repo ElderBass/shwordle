@@ -1,10 +1,10 @@
 import React from 'react';
-import { useGuessContext } from '../store/GuessState';
+import { useGameContext } from '../store/GameState';
 import * as GuessActions from '../store/actions/guesses';
 import styles from './DeleteButton.module.css';
 
 function DeleteButton() {
-  const [state, dispatch] = useGuessContext();
+  const [state, dispatch] = useGameContext();
   const { currentGuess } = state;
 
   function handleDeleteLetter() {

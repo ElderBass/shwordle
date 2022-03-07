@@ -15,7 +15,7 @@ const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
         maxStreak++;
     }
     gamesPlayed++;
-    const winPercentage = gamesWon / gamesPlayed;
+    const winPercentage = (gamesWon / gamesPlayed * 100).toFixed(1);
 
     const updatedStats = {
         gamesPlayed,
@@ -32,7 +32,7 @@ const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
 }
 
 export function getEndGameAlertMessage(guessNumber, answerWord) {
-    let message = `SHWORDLE!\n The answer was ${answerWord.toUpperCase()}\n`;
+    let message = `The answer was ${answerWord.toUpperCase()}\n`;
     switch (guessNumber) {
         case 1:
             message += 'Hacker, reporting.';

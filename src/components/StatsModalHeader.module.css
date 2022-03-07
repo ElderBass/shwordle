@@ -1,0 +1,26 @@
+.statsModalHeader {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'empty header closeIcon';
+    border-bottom: solid 2px #ec3bf2;
+}
+
+.headerText {
+    grid-area: header;
+    font-size: 20px;
+    text-align: center;
+}
+
+.closeIcon {
+    grid-area: closeIcon;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    outline: none;
+    border: none;
+}
+
+.closeIcon:hover {
+    cursor: pointer;
+}

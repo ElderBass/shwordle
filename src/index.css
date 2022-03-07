@@ -1,3 +1,7 @@
+:root {
+  --overlay-background: rgb(55, 1, 94, .5);
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Rajdhani', sans-serif;
