@@ -12,7 +12,6 @@ function DeleteButton() {
     const updatedGuess = currentGuess;
     updatedGuess.pop();
     dispatch(GuessActions.deleteLetter(updatedGuess));
-    console.log('\n updated state after deleting letter = ', state, '\n');
   }
 
   return (

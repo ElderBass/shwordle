@@ -35,7 +35,6 @@ function Letter(props) {
         const guess = currentGuess;
         guess.push(value);
         dispatch(GuessActions.addLetter(guess));
-        console.log('\n updated state after add letter to guess = ', state, '\n');
     }
 
     return (
