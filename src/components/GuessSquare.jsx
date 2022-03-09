@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useGuessContext } from '../store/GuessState';
+import { useGameContext } from '../store/GameState';
 import { getLetterCount, getPreviousGuessLetters, getTimesLetterIsInCorrectSpotAfterIndex } from '../utils/guessSquareUtils';
 import styles from './GuessSquare.module.css';
 
 function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
-    const [state] = useGuessContext();
+    const [state] = useGameContext();
     const { previousGuesses, guessNumber, currentGuess, isWinningGame } = state;
     const isPreviousRow = rowNumber === guessNumber - 1;
 

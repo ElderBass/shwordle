@@ -1,7 +1,10 @@
+@import url('../index.css');
+
 .letter {
     font-size: 16px;
+    text-align: center;
     padding: 18px 10px 18px 12px;
-    border: solid 2px #6f05b6;
+    border: solid 2px var(--lighter-purple);
     margin: 5px;
     width: 40px;
     border-radius: 5px;
@@ -9,17 +12,17 @@
 
 .letter:hover {
     cursor: pointer;
-    background-color: #6f05b6;
+    background-color: var(--lighter-purple);
 }
 
 .inCorrectSpot {
-    background-color: rgb(10, 165, 10);
+    background-color: var(--game-green);
 }
 
 .isInWord {
-    background-color: #b99c18;
+    background-color: var(--game-yellow);
 }
 
 .notInWord {
-    background-color: rgb(24, 23, 23);
+    background-color: var(--game-black);
 }

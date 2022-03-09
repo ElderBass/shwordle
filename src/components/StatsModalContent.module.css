@@ -1,0 +1,20 @@
+@import url('../index.css');
+
+.statsModalContent {
+    flex: 1 0 auto;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.answerWord {
+    color: var(--game-green);
+    font-size: 1.6rem;
+}
+
+.stat {
+    color: var(--hot-pink);
+}

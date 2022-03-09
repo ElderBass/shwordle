@@ -1,11 +1,11 @@
 import React from 'react';
-import { useGuessContext } from '../store/GuessState';
+import { useGameContext } from '../store/GameState';
 import Letter from './Letter';
 import Toolbar from './Toolbar';
 import styles from './Keyboard.module.css';
 
 function Keyboard({ answerWord, wordPool }) {
-    const [state] = useGuessContext();
+    const [state] = useGameContext();
     const { letters } = state;
 
     return (
