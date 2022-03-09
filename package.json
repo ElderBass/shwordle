@@ -1,6 +1,6 @@
 {
   "name": "shwordle",
-  "version": "2.1",
+  "version": "2.2.1",
   "private": true,
   "homepage": "https://elderbass.github.io/Definitely_Not_A_Wordle_Clone/",
   "dependencies": {

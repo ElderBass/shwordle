@@ -4,12 +4,17 @@ import wordListJson from 'word-list-json';
 import randomWords from 'random-words';
 import GuessBlock from './components/GuessBoard';
 import Keyboard from './components/Keyboard';
-import { GuessProvider } from './store/GuessState';
+import { useGameContext } from './store/GameState';
 import { STATS_STORAGE_KEY } from './consts';
+import StatsModal from './components/StatsModal';
 
 function App() {
+    const [state, dispatch] = useGameContext();
+    const { showStatsModal } = state;
+
     const [answerWord, setAnswerWord] = useState('');
     const [wordPool, setWordPool] = useState([]);
+    const [showStats, setShowStats] = useState(showStatsModal);
 
     function generateAnswerWord(previousAnswers) {
         const randomWordsArr = randomWords({ maxLength: 5, exactly: 200 }).filter(word => word.length === 5);
@@ -27,6 +32,7 @@ function App() {
         } else {
             result = answerWord;
         }
+        // console.log('answer word = ', result);
         return result;
     }
 
@@ -54,13 +60,20 @@ function App() {
         setAnswerWord(answerWord);
     }, []);
 
+    useEffect(() => {
+        if (showStatsModal) {
+            setShowStats(true);
+        } else {
+            setShowStats(false);
+        }
+    }, [showStatsModal]);
+
     return (
         <div className="App">
+            {showStats && <StatsModal answerWord={answerWord} />}
             <Header />
-            <GuessProvider>
-                <GuessBlock answerWord={answerWord} />
-                <Keyboard answerWord={answerWord} wordPool={wordPool} />
-            </GuessProvider>
+            <GuessBlock answerWord={answerWord} />
+            <Keyboard answerWord={answerWord} wordPool={wordPool} />
         </div>
     );
 }
