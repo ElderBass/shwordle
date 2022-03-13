@@ -24,9 +24,9 @@ export function setPlayerStats(stats) {
         maxStreak,
         guesses,
         previousAnswers,
+        previousGuessNumber: numberOfGuesses,
     };
 
-    console.log('\n updatedStats after manipulation in setPlayerStats = ', updatedStats, '\n');
     localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(updatedStats));
 }
 

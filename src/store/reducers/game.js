@@ -1,5 +1,6 @@
 import * as GuessActions from '../actions/guesses';
 import * as ModalActions from '../actions/modal';
+import * as StatsActions from '../actions/stats';
 import { letters } from '../../consts/letters';
 import updateLettersArray from '../../utils/updateLettersArray';
 
@@ -13,6 +14,7 @@ export const INITIAL_GAME_STATE = {
     isWinningGame: false,
     showStatsModal: false,
     endGameMessage: '',
+    playerStats: {},
 };
 
 const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
@@ -39,7 +41,7 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
                 previousGuesses: [...state.previousGuesses, guessObj],
                 currentGuess: [],
                 letters: updateLettersArray(state.letters, payload),
-            }
+            };
             break;
         case GuessActions.END_GAME:
             newState = {
@@ -47,21 +49,28 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
                 letters: updateLettersArray(state.letters, payload.comparisonResults),
                 isGameOver: true,
                 isWinningGame: payload.isWin,
-            }
+            };
             break;
         case ModalActions.TOGGLE_SHOW_STATS_MODAL:
             newState = {
                 ...state,
                 showStatsModal: payload,
-            }
+            };
             break;
         case ModalActions.SET_END_GAME_MESSAGE:
             newState = {
                 ...state,
                 endGameMessage: payload,
-            }
+            };
             break;
-        default: newState = state;
+        case StatsActions.SET_PLAYER_STATS:
+            newState = {
+                ...state,
+                playerStats: payload,
+            };
+            break;
+        default:
+            newState = state;
     }
     console.log(`\n updated state after ${type} action = `, newState, '\n');
     return newState;

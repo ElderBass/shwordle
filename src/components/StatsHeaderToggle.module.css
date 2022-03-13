@@ -1,0 +1,18 @@
+@import url('../index.css');
+
+.statsHeaderToggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-purple);
+    color: var(--hot-pink);
+}
+
+.statsHeaderToggle:hover {
+    cursor: pointer;
+}
+
+.statsIcon {
+    background-color: var(--background-purple);
+    color: var(--hot-pink);
+}
