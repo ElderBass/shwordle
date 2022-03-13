@@ -4,6 +4,7 @@ import wordListJson from 'word-list-json';
 import randomWords from 'random-words';
 import GuessBlock from './components/GuessBoard';
 import Keyboard from './components/Keyboard';
+import * as StatsActions from './store/actions/stats';
 import { useGameContext } from './store/GameState';
 import { STATS_STORAGE_KEY } from './consts';
 import StatsModal from './components/StatsModal';
@@ -51,8 +52,10 @@ function App() {
                 })
             );
         }
-        const previousAnswers = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY)).previousAnswers;
-
+        const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
+        dispatch(StatsActions.setPlayerStats(playerStats));
+    
+        const { previousAnswers } = playerStats;
         const wordList = wordListJson.filter(word => word.length === 5 && !previousAnswers.includes(word))
             .map((word) => word.toUpperCase());
         setWordPool(wordList);
