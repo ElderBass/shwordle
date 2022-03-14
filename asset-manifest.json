@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Definitely_Not_A_Wordle_Clone/static/css/main.50a70413.css",
-    "main.js": "/Definitely_Not_A_Wordle_Clone/static/js/main.0ac51dca.js",
+    "main.css": "/Definitely_Not_A_Wordle_Clone/static/css/main.35c6a0fc.css",
+    "main.js": "/Definitely_Not_A_Wordle_Clone/static/js/main.68995132.js",
     "index.html": "/Definitely_Not_A_Wordle_Clone/index.html",
-    "main.50a70413.css.map": "/Definitely_Not_A_Wordle_Clone/static/css/main.50a70413.css.map",
-    "main.0ac51dca.js.map": "/Definitely_Not_A_Wordle_Clone/static/js/main.0ac51dca.js.map"
+    "main.35c6a0fc.css.map": "/Definitely_Not_A_Wordle_Clone/static/css/main.35c6a0fc.css.map",
+    "main.68995132.js.map": "/Definitely_Not_A_Wordle_Clone/static/js/main.68995132.js.map"
   },
   "entrypoints": [
-    "static/css/main.50a70413.css",
-    "static/js/main.0ac51dca.js"
+    "static/css/main.35c6a0fc.css",
+    "static/js/main.68995132.js"
   ]
 }
