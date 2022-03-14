@@ -31,6 +31,14 @@
     overflow: hidden;
 }
 
+.green {
+    background-color: var(--game-green);
+}
+
+.default {
+    background-color: var(--game-black);
+}
+
 .guessNumber {
     flex: 0 1 20px;
     color: var(--hot-pink);

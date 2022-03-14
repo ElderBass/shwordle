@@ -61,7 +61,7 @@ function App() {
         setWordPool(wordList);
         const answerWord = generateAnswerWord(previousAnswers);
         setAnswerWord(answerWord);
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (showStatsModal) {
