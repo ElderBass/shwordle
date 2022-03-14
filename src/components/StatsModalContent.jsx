@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { STATS_STORAGE_KEY } from '../consts';
 import GuessDistribution from './GuessDistribution';
+import { useGameContext } from '../store/GameState';
 import styles from './StatsModalContent.module.css';
 
 function StatsModalContent({ answerWord }) {
     const [stats, setStats] = useState({});
+    const [state, dispatch] = useGameContext();
+    const { isGameOver } = state;
 
     useEffect(() => {
         const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
@@ -13,12 +16,14 @@ function StatsModalContent({ answerWord }) {
 
     return (
         <div className={styles.statsModalContent}>
-            <h4>
-                The answer was <span className={styles.answerWord}>{answerWord}</span>
-            </h4>
+            {isGameOver && (
+                <h4>
+                    The answer was <span className={styles.answerWord}>{answerWord}</span>
+                </h4>
+            )}
             <div className={styles.statsContentWrapper}>
                 <div className={styles.statistics}>
-                <div className={styles.guessDistributionText}>
+                    <div className={styles.guessDistributionText}>
                         <h4 className={styles.statisticsHeader}>Statistics</h4>
                     </div>
                     <div className={styles.statisticsWrapper}>
