@@ -31,3 +31,14 @@
 .image {
     width: 80%;
 }
+
+.turtleLink {
+    text-decoration: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.turtleLink:hover {
+    box-shadow: 0 4px 23px 0 var(--laura-blue);
+}
