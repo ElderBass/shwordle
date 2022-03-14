@@ -8,10 +8,11 @@ import * as StatsActions from './store/actions/stats';
 import { useGameContext } from './store/GameState';
 import { STATS_STORAGE_KEY } from './consts';
 import StatsModal from './components/StatsModal';
+import LauraModal from './components/LauraModal';
 
 function App() {
     const [state, dispatch] = useGameContext();
-    const { showStatsModal } = state;
+    const { showStatsModal, showLauraModal } = state;
 
     const [answerWord, setAnswerWord] = useState('');
     const [wordPool, setWordPool] = useState([]);
@@ -73,6 +74,7 @@ function App() {
 
     return (
         <div className="App">
+            {showLauraModal && <LauraModal />}
             {showStats && <StatsModal answerWord={answerWord} />}
             <Header />
             <GuessBlock answerWord={answerWord} />

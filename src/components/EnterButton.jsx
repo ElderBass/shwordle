@@ -4,14 +4,25 @@ import * as GuessActions from '../store/actions/guesses';
 import * as ModalActions from '../store/actions/modal';
 import { compareGuessWithAnswer, isWinningGuess } from '../utils/guessingUtils';
 import { getEndGameAlertMessage, setPlayerStats } from '../utils/gameOverUtils';
+import * as LauraActions from '../store/actions/laura';
 import styles from './EnterButton.module.css';
 
 function EnterButton({ answerWord, wordPool }) {
   const [state, dispatch] = useGameContext();
   const { currentGuess, guessNumber } = state;
 
+  function checkForLauraMode(guessWord) {
+    if (guessNumber === 1 && guessWord === 'LAURA') {
+        dispatch(LauraActions.setLauraMode(true));
+        return true;
+    }
+}
+
   async function guessWordHandler() {
     const currentGuessWord = currentGuess.join('');
+    if (checkForLauraMode(currentGuessWord)) {
+      return;
+    }
     if (currentGuess.length < 5 || !wordPool.includes(currentGuessWord)) return;
 
     const comparisonResults = compareGuessWithAnswer(currentGuess, answerWord);

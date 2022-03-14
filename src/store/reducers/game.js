@@ -1,6 +1,7 @@
 import * as GuessActions from '../actions/guesses';
 import * as ModalActions from '../actions/modal';
 import * as StatsActions from '../actions/stats';
+import * as LauraActions from '../actions/laura';
 import { letters } from '../../consts/letters';
 import updateLettersArray from '../../utils/updateLettersArray';
 
@@ -15,6 +16,8 @@ export const INITIAL_GAME_STATE = {
     showStatsModal: false,
     endGameMessage: '',
     playerStats: {},
+    lauraMode: false,
+    showLauraModal: false,
 };
 
 const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
@@ -67,6 +70,20 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
             newState = {
                 ...state,
                 playerStats: payload,
+            };
+            break;
+        case LauraActions.SET_LAURA_MODE:
+            newState = {
+                ...state,
+                lauraMode: true,
+                currentGuess: [],
+                guessNumber: 1,
+            };
+            break;
+            case LauraActions.SET_SHOW_LAURA_MODAL:
+            newState = {
+                ...state,
+                showLauraModal: payload,
             };
             break;
         default:
