@@ -14,7 +14,7 @@ function LauraModal() {
                 </h4>
                 <a
                     className={styles.turtleLink}
-                    href="https://www.youtube.com/watch?v=ZH63T005WTE"
+                    href="https://www.youtube.com/watch?v=9KnEDSYksZI"
                     rel='noreferrer'
                     target='_blank'
                 >
