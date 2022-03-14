@@ -1,0 +1,12 @@
+.lauraLogo {
+    flex: 1 0 auto;
+    font-size: 30px;
+    color: var(--laura-blue);
+    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Sansita Swashed', cursive;
+}
+
+.lauraLogo:hover {
+    color: var(--hot-pink);
+    cursor: pointer;
+}
