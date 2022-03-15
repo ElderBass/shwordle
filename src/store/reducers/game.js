@@ -2,6 +2,7 @@ import * as GuessActions from '../actions/guesses';
 import * as ModalActions from '../actions/modal';
 import * as StatsActions from '../actions/stats';
 import * as LauraActions from '../actions/laura';
+import * as GameOverActions from '../actions/gameOver';
 import { letters } from '../../consts/letters';
 import updateLettersArray from '../../utils/updateLettersArray';
 
@@ -80,11 +81,15 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
                 guessNumber: 1,
             };
             break;
-            case LauraActions.SET_SHOW_LAURA_MODAL:
+        case LauraActions.SET_SHOW_LAURA_MODAL:
             newState = {
                 ...state,
                 showLauraModal: payload,
             };
+            break;
+        case GameOverActions.PLAY_AGAIN:
+            newState = INITIAL_GAME_STATE;
+            window.location = '/';
             break;
         default:
             newState = state;

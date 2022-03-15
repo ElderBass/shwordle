@@ -30,11 +30,12 @@ function EnterButton({ answerWord, wordPool }) {
     const isWin = isWinningGuess(comparisonResults, answerWord);
 
     if (isWin || guessNumber === 6) {
-      await dispatch(GuessActions.endGame({ isWin, comparisonResults }));
       setPlayerStats({ isWin, numberOfGuesses: guessNumber, answerWord });
+      await dispatch(GuessActions.endGame({ isWin, comparisonResults }));
 
       const endMessage = getEndGameAlertMessage(guessNumber, answerWord, isWin);
       await dispatch(ModalActions.setEndGameMessage(endMessage));
+      await dispatch(ModalActions.setEndGameGuessNumber(guessNumber));
       await dispatch(ModalActions.toggleShowStatsModal(true));
     }
   }
