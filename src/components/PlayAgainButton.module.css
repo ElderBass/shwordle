@@ -1,0 +1,20 @@
+@import url('../index.css');
+
+.playAgainBtn {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 28px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--game-green);
+    color: var(--text-white);
+}
+
+.playAgainBtn:hover {
+    cursor: pointer;
+    background-color: var(--hot-pink);
+}
