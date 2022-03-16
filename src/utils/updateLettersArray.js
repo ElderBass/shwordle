@@ -1,6 +1,7 @@
 
 function updateLettersArray(lettersArr, guessArr) {
     const updatedArray = lettersArr.map(letter => {
+        if (letter.inCorrectSpot) return letter;
         const updatedLetter = {
             value: letter.value,
             isInWord: letter.isInWord,
