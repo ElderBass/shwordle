@@ -7,14 +7,14 @@ import PlayAgainButton from './PlayAgainButton';
 
 function StatsModal({ answerWord }) {
     const [state] = useGameContext();
-    const { endGameMessage } = state;
+    const { endGameMessage, isGameOver } = state;
 
     return (
         <div className={styles.overlay}>
             <div className={styles.statsModal}>
                 <StatsModalHeader />
                 <StatsModalContent answerWord={answerWord} message={endGameMessage} />
-                <PlayAgainButton />
+                {isGameOver && <PlayAgainButton />}
             </div>
         </div>
     );

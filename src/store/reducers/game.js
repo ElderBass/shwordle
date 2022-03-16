@@ -75,10 +75,9 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
             break;
         case LauraActions.SET_LAURA_MODE:
             newState = {
-                ...state,
-                lauraMode: true,
+                ...INITIAL_GAME_STATE,
                 currentGuess: [],
-                guessNumber: 1,
+                lauraMode: true,
             };
             break;
         case LauraActions.SET_SHOW_LAURA_MODAL:
@@ -89,7 +88,6 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
             break;
         case GameOverActions.PLAY_AGAIN:
             newState = INITIAL_GAME_STATE;
-            window.location = '/';
             break;
         default:
             newState = state;

@@ -8,6 +8,7 @@ function PlayAgainButton() {
 
     const onClick = async () => {
         await dispatch(GameOverActions.setPlayAgain());
+        window.location = '/';
     };
 
     return (

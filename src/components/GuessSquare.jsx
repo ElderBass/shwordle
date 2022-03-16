@@ -5,15 +5,27 @@ import styles from './GuessSquare.module.css';
 
 function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
     const [state] = useGameContext();
-    const { previousGuesses, guessNumber, currentGuess, isWinningGame } = state;
+    const { previousGuesses, guessNumber, currentGuess, isWinningGame, lauraMode } = state;
     const isPreviousRow = rowNumber === guessNumber - 1;
 
     const [classes, setClasses] = useState(null);
 
     useEffect(() => {
+        let classNames = styles.guessSquare;
+        if (rowNumber === 1 && currentGuess.length === 0 && lauraMode) {
+            setClasses(classNames);
+        }
+    }, [lauraMode, currentGuess, rowNumber]);
+
+    useEffect(() => {
         if (previousGuesses.length === 0 || !isPreviousRow) return;
 
         let classNames = styles.guessSquare;
+        if (rowNumber === 1 && currentGuess.length === 0 && lauraMode) {
+            console.log('\n are we making it into this if check ? \n');
+            setClasses(classNames);
+            return;
+        }
         if (isWinningGame) {
             classNames += ` ${styles.inCorrectSpot}`;
         } else {
@@ -57,6 +69,7 @@ function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
         rowNumber,
         currentGuess,
         isWinningGame,
+        lauraMode,
     ]);
 
     return <div className={classes || styles.guessSquare}>{letter}</div>;
