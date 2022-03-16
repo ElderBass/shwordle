@@ -10,11 +10,11 @@
     outline: none;
     border: none;
     border-radius: 5px;
-    background-color: var(--game-green);
+    background-color: var(--darker-pink);
     color: var(--text-white);
 }
 
 .playAgainBtn:hover {
     cursor: pointer;
-    background-color: var(--hot-pink);
+    background-color: var(--game-green);
 }

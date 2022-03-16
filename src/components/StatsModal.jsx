@@ -1,18 +1,21 @@
 import React from 'react';
 import { useGameContext } from '../store/GameState';
+import * as ModalActions from '../store/actions/modal';
 import StatsModalHeader from './StatsModalHeader';
 import StatsModalContent from './StatsModalContent';
 import styles from './StatsModal.module.css';
 import PlayAgainButton from './PlayAgainButton';
 
 function StatsModal({ answerWord }) {
-    const [state] = useGameContext();
-    const { endGameMessage, isGameOver } = state;
+    const [state, dispatch] = useGameContext();
+    const { endGameMessage, isGameOver, showStatsModal } = state;
+
+    const closeModalHandler = () => dispatch(ModalActions.toggleShowStatsModal(!showStatsModal));
 
     return (
-        <div className={styles.overlay}>
+        <div onClick={closeModalHandler} className={styles.overlay}>
             <div className={styles.statsModal}>
-                <StatsModalHeader />
+                <StatsModalHeader onClick={closeModalHandler} />
                 <StatsModalContent answerWord={answerWord} message={endGameMessage} />
                 {isGameOver && <PlayAgainButton />}
             </div>

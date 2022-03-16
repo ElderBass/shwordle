@@ -1,3 +1,5 @@
+@import url('../index.css');
+
 .deleteBtn {
   flex: 1 0 45%;
   display: flex;
@@ -6,15 +8,15 @@
   font-size: 20px;
   text-align: center;
   padding: 18px 15px;
-  border: solid 2px #6f05b6;
+  border: solid 2px var(--lighter-purple);
   margin: 5px;
   min-width: 70px;
   border-radius: 8px;
 }
 
 .deleteBtn:hover {
-  border: solid 2px #ba03c0;
+  border: solid 2px var(--darker-pink);
   cursor: pointer;
   font-weight: 500;
-  background-color: #ba03c0;
+  background-color: var(--darker-pink);
 }

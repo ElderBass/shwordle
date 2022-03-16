@@ -1,12 +1,13 @@
 :root {
   --overlay-background: rgb(55, 1, 94, .7);
   --hot-pink: #ec3bf2;
+  --darker-pink: #ba03c0;
   --background-purple: rgb(55, 1, 94);
   --lighter-purple: #6f05b6;
-  --text-white: rgb(220, 255, 225);
   --game-green: rgb(10, 165, 10);
   --game-yellow: #b99c18;
   --game-black: rgb(24, 23, 23);
+  --text-white: rgb(220, 255, 225);
   --laura-blue: rgb(87, 179, 255);
 }
 
