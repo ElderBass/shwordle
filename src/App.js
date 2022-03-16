@@ -20,7 +20,6 @@ function App() {
 
     function generateAnswerWord(previousAnswers) {
         const randomWordsArr = randomWords({ maxLength: 5, exactly: 500 }).filter(word => word.length === 5);
-        console.log('\n randomw words array = ', randomWordsArr, '\n');
         let result;
         let answerWord = randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
         if (previousAnswers.includes(answerWord)) {

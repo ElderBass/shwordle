@@ -7,7 +7,7 @@ function Letter(props) {
     const { value, inWord, correctSpot } = props;
     const [classes, setClasses] = useState('');
     const [state, dispatch] = useGameContext();
-    const { currentGuess, guessNumber, guessedLetters, isGameOver, lauraMode } = state;
+    const { currentGuess, guessedLetters, isGameOver } = state;
 
     useEffect(() => {
         let classNames = styles.letter;
@@ -23,7 +23,7 @@ function Letter(props) {
             } 
         }
         setClasses(classNames);
-    }, [inWord, correctSpot, guessedLetters, value, lauraMode, guessNumber]);
+    }, [inWord, correctSpot, guessedLetters, value]);
 
 
     function addLetterToGuess() {
