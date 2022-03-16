@@ -24,6 +24,7 @@
     box-shadow: 0 4px 23px 0 var(--game-black);
     background-color: var(--background-purple);
     width: 40%;
+    min-width: 600px;
     margin: auto;
     padding: 5px 0px 20px 0px;
 }

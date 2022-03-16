@@ -9,12 +9,14 @@ import styles from './EnterButton.module.css';
 
 function EnterButton({ answerWord, wordPool }) {
   const [state, dispatch] = useGameContext();
-  const { currentGuess, guessNumber } = state;
+  const { currentGuess, guessNumber, previousGuesses } = state;
 
   function checkForLauraMode(guessWord) {
-    if (guessNumber === 1 && guessWord === 'LAURA') {
+    if (guessNumber === 2 && guessWord === 'TREBE') {
+      if (previousGuesses[0].guess.join('') === 'LAURA') {
         dispatch(LauraActions.setLauraMode(true));
         return true;
+      }
     }
 }
 
@@ -26,17 +28,18 @@ function EnterButton({ answerWord, wordPool }) {
     if (currentGuess.length < 5 || !wordPool.includes(currentGuessWord)) return;
 
     const comparisonResults = compareGuessWithAnswer(currentGuess, answerWord);
-    await dispatch(GuessActions.guessWord(comparisonResults));
     const isWin = isWinningGuess(comparisonResults, answerWord);
 
     if (isWin || guessNumber === 6) {
       setPlayerStats({ isWin, numberOfGuesses: guessNumber, answerWord });
       await dispatch(GuessActions.endGame({ isWin, comparisonResults }));
 
-      const endMessage = getEndGameAlertMessage(guessNumber, answerWord, isWin);
+      const endMessage = getEndGameAlertMessage(guessNumber, isWin);
       await dispatch(ModalActions.setEndGameMessage(endMessage));
       await dispatch(ModalActions.setEndGameGuessNumber(guessNumber));
       await dispatch(ModalActions.toggleShowStatsModal(true));
+    } else {
+      await dispatch(GuessActions.guessWord(comparisonResults));
     }
   }
 

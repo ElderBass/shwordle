@@ -30,7 +30,7 @@ export function setPlayerStats(stats) {
     localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(updatedStats));
 }
 
-export function getEndGameAlertMessage(guessNumber, answerWord, isWin) {
+export function getEndGameAlertMessage(guessNumber, isWin) {
     let message = isWin ? `You win...this time...<br>`
                         : 'YOU LOSE \n lol sucks to suck bro git gud';
     if (!isWin) return;

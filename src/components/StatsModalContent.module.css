@@ -42,12 +42,6 @@
     margin: 5px 0;
 }
 
-/* .statsText {
-    overflow: hidden;
-    flex: 0 1 16px;
-    line-height: 15px; 
-} */
-
 .answerWord {
     color: var(--game-green);
 }

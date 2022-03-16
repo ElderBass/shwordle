@@ -14,12 +14,12 @@ function App() {
     const [state, dispatch] = useGameContext();
     const { showStatsModal, showLauraModal } = state;
 
-    const [answerWord, setAnswerWord] = useState('');
+    const [solution, setSolution] = useState('');
     const [wordPool, setWordPool] = useState([]);
     const [showStats, setShowStats] = useState(showStatsModal);
 
     function generateAnswerWord(previousAnswers) {
-        const randomWordsArr = randomWords({ maxLength: 5, exactly: 200 }).filter(word => word.length === 5);
+        const randomWordsArr = randomWords({ maxLength: 5, exactly: 500 }).filter(word => word.length === 5);
         let result;
         let answerWord = randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
         if (previousAnswers.includes(answerWord)) {
@@ -34,7 +34,6 @@ function App() {
         } else {
             result = answerWord;
         }
-        // console.log('answer word = ', result);
         return result;
     }
 
@@ -61,8 +60,12 @@ function App() {
             .map((word) => word.toUpperCase());
         setWordPool(wordList);
         const answerWord = generateAnswerWord(previousAnswers);
-        setAnswerWord(answerWord);
+        setSolution(answerWord);
     }, [dispatch]);
+
+    // useEffect(() => {
+    //     console.log('\n solution = ', solution, '\n');
+    // }, [solution]);
 
     useEffect(() => {
         if (showStatsModal) {
@@ -75,10 +78,10 @@ function App() {
     return (
         <div className="App">
             {showLauraModal && <LauraModal />}
-            {showStats && <StatsModal answerWord={answerWord} />}
+            {showStats && <StatsModal answerWord={solution} />}
             <Header />
-            <GuessBlock answerWord={answerWord} />
-            <Keyboard answerWord={answerWord} wordPool={wordPool} />
+            <GuessBlock answerWord={solution} />
+            <Keyboard answerWord={solution} wordPool={wordPool} />
         </div>
     );
 }
