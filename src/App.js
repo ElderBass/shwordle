@@ -63,9 +63,9 @@ function App() {
         setSolution(answerWord);
     }, [dispatch]);
 
-    // useEffect(() => {
-    //     console.log('\n solution = ', solution, '\n');
-    // }, [solution]);
+    useEffect(() => {
+        console.log('\n solution = ', solution, '\n');
+    }, [solution]);
 
     useEffect(() => {
         if (showStatsModal) {

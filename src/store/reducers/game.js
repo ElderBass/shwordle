@@ -16,6 +16,7 @@ export const INITIAL_GAME_STATE = {
     isWinningGame: false,
     showStatsModal: false,
     endGameMessage: '',
+    endGameGuessNumber: null,
     playerStats: {},
     lauraMode: false,
     showLauraModal: false,
@@ -65,6 +66,12 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
             newState = {
                 ...state,
                 endGameMessage: payload,
+            };
+            break;
+        case ModalActions.SET_END_GAME_GUESS_NUMBER:
+            newState = {
+                ...state,
+                endGameGuessNumber: payload,
             };
             break;
         case StatsActions.SET_PLAYER_STATS:
