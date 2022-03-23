@@ -3,16 +3,17 @@ import { useGameContext } from '../store/GameState';
 
 function GuessDistributionRow({ styles, guessNumber, guess, width }) {
     const [state] = useGameContext();
-    const { playerStats: { previousGuessNumber } } = state;
+    const { endGameGuessNumber } = state;
     const [guessBarClasses, setGuessBarClasses] = useState(styles.guessBar);
 
     useEffect(() => {
-        if (previousGuessNumber === guessNumber) {
-            setGuessBarClasses(guessBarClasses + ` ${styles.green}`);
+        const classNames = styles.guessBar;
+        if (parseInt(endGameGuessNumber) === guessNumber) {
+            setGuessBarClasses(classNames + ` ${styles.green}`);
         } else {
-            setGuessBarClasses(guessBarClasses + ` ${styles.default}`);
+            setGuessBarClasses(classNames + ` ${styles.default}`);
         }
-    }, [previousGuessNumber, guessNumber]);
+    }, [endGameGuessNumber, guessNumber]);
 
 
     return (

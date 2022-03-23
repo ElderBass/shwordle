@@ -1,27 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useGameContext } from '../store/GameState';
-import { getLetterCount, getPreviousGuessLetters, getTimesLetterIsInCorrectSpotAfterIndex } from '../utils/guessSquareUtils';
+import {
+    getLetterCount,
+    getPreviousGuessLetters,
+    getTimesLetterIsInCorrectSpotAfterIndex,
+} from '../utils/guessSquareUtils';
 import styles from './GuessSquare.module.css';
 
 function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
     const [state] = useGameContext();
-    const { previousGuesses, guessNumber, currentGuess, isWinningGame, lauraMode } = state;
+    const {
+        previousGuesses,
+        guessNumber,
+        currentGuess,
+        isWinningGame,
+        lauraMode,
+        endGameGuessNumber,
+    } = state;
     const isPreviousRow = rowNumber === guessNumber - 1;
 
     const [classes, setClasses] = useState(null);
 
     useEffect(() => {
         let classNames = styles.guessSquare;
-        if (rowNumber === 1 && currentGuess.length === 0 && lauraMode) {
+        if (isWinningGame && rowNumber === endGameGuessNumber) {
+            setClasses(classNames + ` ${styles.inCorrectSpot}`);
+        } else if (rowNumber === 1 && guessNumber === 1 && currentGuess.length === 0 && lauraMode) {
             setClasses(classNames);
         }
-    }, [lauraMode, currentGuess, rowNumber]);
+    }, [
+        isWinningGame,
+        previousGuesses,
+        lauraMode,
+        currentGuess,
+        endGameGuessNumber,
+        rowNumber,
+        guessNumber,
+    ]);
 
     useEffect(() => {
         if (previousGuesses.length === 0 || !isPreviousRow) return;
 
         let classNames = styles.guessSquare;
-        if (isWinningGame) {
+        if (isWinningGame && rowNumber === endGameGuessNumber) {
             classNames += ` ${styles.inCorrectSpot}`;
         } else {
             const previousGuessLetters = getPreviousGuessLetters(previousGuesses, rowNumber);
@@ -32,19 +53,36 @@ function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
                     classNames += ` ${styles.inCorrectSpot}`;
                 } else {
                     const timesLetterIsInAnswer = getLetterCount(answerWordArr, letter);
-                    const timesLetterIsInPreviousGuess = getLetterCount(previousGuessLetters, letter);
+                    const timesLetterIsInPreviousGuess = getLetterCount(
+                        previousGuessLetters,
+                        letter
+                    );
 
-                    const timesLetterIsInCorrectSpotAfterThisIndex = 
-                        getTimesLetterIsInCorrectSpotAfterIndex(previousGuessLetters, answerWordArr, letter, index);
+                    const timesLetterIsInCorrectSpotAfterThisIndex =
+                        getTimesLetterIsInCorrectSpotAfterIndex(
+                            previousGuessLetters,
+                            answerWordArr,
+                            letter,
+                            index
+                        );
 
                     if (timesLetterIsInAnswer >= timesLetterIsInPreviousGuess) {
                         classNames += ` ${styles.isInWord}`;
                     } else if (timesLetterIsInPreviousGuess > timesLetterIsInAnswer) {
                         if (
-                            timesLetterIsInPreviousGuess >
-                            timesLetterIsInCorrectSpotAfterThisIndex
+                            timesLetterIsInPreviousGuess > timesLetterIsInCorrectSpotAfterThisIndex &&
+                            timesLetterIsInCorrectSpotAfterThisIndex !== 0
                         ) {
                             classNames += ` ${styles.notInWord}`;
+                        } else {
+                            let letterHasBeenColored = null;
+                            if (letterHasBeenColored && letterHasBeenColored.letter === letter) {
+                                classNames += ` ${styles.notInWord}`;
+                            } else {
+                                letterHasBeenColored = { letter };
+                                classNames += ` ${styles.isInWord}`;
+                            }
+                            
                         }
                     } else {
                         classNames += ` ${styles.isInWord}`;
@@ -64,6 +102,7 @@ function GuessSquare({ letter = '', rowNumber, index, answerWord }) {
         rowNumber,
         currentGuess,
         isWinningGame,
+        endGameGuessNumber,
         lauraMode,
     ]);
 
