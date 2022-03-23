@@ -2,7 +2,7 @@
   "name": "shwordle",
   "version": "2.2.1",
   "private": true,
-  "homepage": "https://elderbass.github.io/Definitely_Not_A_Wordle_Clone/",
+  "homepage": "https://elderbass.github.io/shwordle/",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.2",

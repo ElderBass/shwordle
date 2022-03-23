@@ -8,7 +8,9 @@ function PlayAgainButton() {
 
     const onClick = async () => {
         await dispatch(GameOverActions.setPlayAgain());
-        window.location = '/';
+        const { hostname } = window.location;
+        const resetUrl = hostname.includes('localhost') ? '/' : 'https://elderbass.github.io/shwordle/'
+        window.location = resetUrl;
     };
 
     return (
