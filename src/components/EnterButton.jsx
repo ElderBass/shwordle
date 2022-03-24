@@ -9,7 +9,7 @@ import styles from './EnterButton.module.css';
 
 function EnterButton({ answerWord, wordPool }) {
   const [state, dispatch] = useGameContext();
-  const { currentGuess, guessNumber, previousGuesses } = state;
+  const { currentGuess, guessNumber, previousGuesses, lauraMode } = state;
 
   function checkForLauraMode(guessWord) {
     if (guessNumber === 2 && guessWord === 'TREBE') {
@@ -34,7 +34,7 @@ function EnterButton({ answerWord, wordPool }) {
       setPlayerStats({ isWin, numberOfGuesses: guessNumber, answerWord });
       await dispatch(GuessActions.endGame({ isWin, comparisonResults }));
 
-      const endMessage = getEndGameAlertMessage(guessNumber, isWin);
+      const endMessage = getEndGameAlertMessage(guessNumber, isWin, lauraMode);
       await dispatch(ModalActions.setEndGameMessage(endMessage));
       await dispatch(ModalActions.setEndGameGuessNumber(guessNumber));
       await dispatch(ModalActions.toggleShowStatsModal(true));

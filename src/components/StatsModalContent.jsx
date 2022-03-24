@@ -7,7 +7,12 @@ import styles from './StatsModalContent.module.css';
 function StatsModalContent({ answerWord }) {
     const [stats, setStats] = useState({});
     const [state, dispatch] = useGameContext();
-    const { isGameOver } = state;
+    const { isGameOver, isWin, endGameMessage } = state;
+
+
+    // let messageBase = isWin
+    //     ? `You win...this time...`
+    //     : 'YOU LOSE lol sucks to suck bro git gud';
 
     useEffect(() => {
         const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
@@ -20,6 +25,12 @@ function StatsModalContent({ answerWord }) {
                 <h4>
                     The answer was <span className={styles.answerWord}>{answerWord}</span>
                 </h4>
+            )}
+            {endGameMessage && (
+                <div className={styles.endGameMessage}>
+                    {/* <h4>{messageBase}</h4> */}
+                    <h4>{endGameMessage}</h4>
+                </div>
             )}
             <div className={styles.statsContentWrapper}>
                 <div className={styles.statistics}>
