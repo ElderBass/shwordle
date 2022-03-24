@@ -14,23 +14,27 @@ function App() {
     const [state, dispatch] = useGameContext();
     const { showStatsModal, showLauraModal } = state;
 
-    const [solution, setSolution] = useState('');
+    const [solution, setSolution] = useState(null);
     const [wordPool, setWordPool] = useState([]);
     const [showStats, setShowStats] = useState(showStatsModal);
 
     function generateAnswerWord(previousAnswers) {
-        const randomWordsArr = randomWords({ maxLength: 5, exactly: 500 }).filter(word => word.length === 5);
+        const randomWordsArr = randomWords({ maxLength: 5, exactly: 500 }).filter(
+            (word) => word.length === 5
+        );
         let result;
-        let answerWord = randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
+        let answerWord =
+            randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
         if (previousAnswers.includes(answerWord)) {
-            answerWord = randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
+            answerWord =
+                randomWordsArr[Math.floor(Math.random() * randomWordsArr.length)].toUpperCase();
             while (previousAnswers.includes(answerWord)) {
                 answerWord = randomWords[Math.floor(Math.random() * randomWords.length)];
                 if (!previousAnswers.includes(answerWord)) {
                     result = answerWord;
                     break;
                 }
-            };
+            }
         } else {
             result = answerWord;
         }
@@ -54,18 +58,22 @@ function App() {
         }
         const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
         dispatch(StatsActions.setPlayerStats(playerStats));
-    
+
         const { previousAnswers } = playerStats;
-        const wordList = wordListJson.filter(word => word.length === 5 && !previousAnswers.includes(word))
+        const wordList = wordListJson
+            .filter((word) => word.length === 5 && !previousAnswers.includes(word))
             .map((word) => word.toUpperCase());
         setWordPool(wordList);
-        const answerWord = generateAnswerWord(previousAnswers);
-        setSolution(answerWord);
-    }, [dispatch]);
 
-    // useEffect(() => {
-    //     console.log('\n solution = ', solution, '\n');
-    // }, [solution]);
+        if (!solution) {
+            const answerWord = generateAnswerWord(previousAnswers);
+            setSolution(answerWord);
+        }
+    }, [dispatch, solution]);
+
+    useEffect(() => {
+        console.log('\n solution = ', solution, '\n');
+    }, [solution]);
 
     useEffect(() => {
         if (showStatsModal) {

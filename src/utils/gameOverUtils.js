@@ -1,4 +1,5 @@
 import { STATS_STORAGE_KEY } from '../consts';
+const laura = require('../consts/laura.json');
 
 export function setPlayerStats(stats) {
     const playerStats = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
@@ -8,13 +9,13 @@ export function setPlayerStats(stats) {
     if (isWin) {
         guesses = getUpdatedGuessPayload(guesses, numberOfGuesses);
         gamesWon++;
-        currentStreak++
+        currentStreak++;
     }
     if (currentStreak > maxStreak) {
         maxStreak++;
     }
     gamesPlayed++;
-    const winPercentage = (gamesWon / gamesPlayed * 100).toFixed(1);
+    const winPercentage = ((gamesWon / gamesPlayed) * 100).toFixed(1);
 
     const updatedStats = {
         gamesPlayed,
@@ -30,32 +31,41 @@ export function setPlayerStats(stats) {
     localStorage.setItem(STATS_STORAGE_KEY, JSON.stringify(updatedStats));
 }
 
-export function getEndGameAlertMessage(guessNumber, isWin) {
-    let message = isWin ? `You win...this time...<br>`
-                        : 'YOU LOSE \n lol sucks to suck bro git gud';
+export function getEndGameAlertMessage(guessNumber, isWin, lauraMode = false) {
+    console.log('laura = ', laura);
     if (!isWin) return;
+
+    let message = '';
     switch (guessNumber) {
         case 1:
-            message += 'Hacker, reporting.';
+            message += lauraMode ? laura.one : 'Hacker, reporting.';
             break;
         case 2:
-            message += 'Do not confuse blatant luck with "skill".';
+            message += lauraMode ? laura.two : 'Do not confuse blatant luck with "skill".';
             break;
         case 3:
-            message += '3 guesses wow am I supposed to be impressed?';
+            message += lauraMode ? laura.three : '3 guesses wow am I supposed to be impressed?';
             break;
         case 4:
-            message += '4 guesses. eh. I\'ll venture 1 guess that this took you far too long.';
+            message += lauraMode
+                ? laura.four
+                : "4 guesses. eh. I'll venture 1 guess that this took you far too long.";
             break;
         case 5:
-            message += 'Your confidence must be shaken after 5 guesses, which it probably should be.';
+            message += lauraMode
+                ? laura.five
+                : 'Your confidence must be shaken after 5 guesses, which it probably should be.';
             break;
         case 6:
-            message += 'You made ME sweat jeez. Wipe yourself off and git gud, bro';
+            message += lauraMode
+                ? laura.six
+                : 'You made ME sweat jeez. Wipe yourself off and git gud, bro';
             break;
         default:
             break;
     }
+    console.log('message = ', message);
+
     return message;
 }
 
