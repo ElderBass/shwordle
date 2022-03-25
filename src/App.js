@@ -5,6 +5,7 @@ import randomWords from 'random-words';
 import GuessBlock from './components/GuessBoard';
 import Keyboard from './components/Keyboard';
 import * as StatsActions from './store/actions/stats';
+import * as LauraActions from './store/actions/laura';
 import { useGameContext } from './store/GameState';
 import { STATS_STORAGE_KEY } from './consts';
 import StatsModal from './components/StatsModal';
@@ -42,6 +43,13 @@ function App() {
     }
 
     useEffect(() => {
+        const lauraMode = localStorage.getItem('lauraMode') && localStorage.getItem('lauraMode');
+        if (lauraMode && lauraMode === 'true') {
+            dispatch(LauraActions.setLauraMode(true));
+        }
+    }, [dispatch]);
+
+    useEffect(() => {
         if (!localStorage.getItem(STATS_STORAGE_KEY)) {
             localStorage.setItem(
                 STATS_STORAGE_KEY,
@@ -71,9 +79,9 @@ function App() {
         }
     }, [dispatch, solution]);
 
-    useEffect(() => {
-        console.log('\n solution = ', solution, '\n');
-    }, [solution]);
+    // useEffect(() => {
+    //     console.log('\n solution = ', solution, '\n');
+    // }, [solution]);
 
     useEffect(() => {
         if (showStatsModal) {
