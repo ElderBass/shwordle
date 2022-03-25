@@ -81,6 +81,7 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
             };
             break;
         case LauraActions.SET_LAURA_MODE:
+            localStorage.setItem('lauraMode', 'true');
             newState = {
                 ...INITIAL_GAME_STATE,
                 currentGuess: [],
