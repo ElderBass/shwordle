@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/shwordle/static/css/main.195b646c.css",
-    "main.js": "/shwordle/static/js/main.1e4ce0ab.js",
+    "main.css": "/shwordle/static/css/main.56b6cbc1.css",
+    "main.js": "/shwordle/static/js/main.7f87f18b.js",
     "index.html": "/shwordle/index.html",
-    "main.195b646c.css.map": "/shwordle/static/css/main.195b646c.css.map",
-    "main.1e4ce0ab.js.map": "/shwordle/static/js/main.1e4ce0ab.js.map"
+    "main.56b6cbc1.css.map": "/shwordle/static/css/main.56b6cbc1.css.map",
+    "main.7f87f18b.js.map": "/shwordle/static/js/main.7f87f18b.js.map"
   },
   "entrypoints": [
-    "static/css/main.195b646c.css",
-    "static/js/main.1e4ce0ab.js"
+    "static/css/main.56b6cbc1.css",
+    "static/js/main.7f87f18b.js"
   ]
 }
