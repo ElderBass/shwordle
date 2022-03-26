@@ -13,7 +13,7 @@ function GuessDistributionRow({ styles, guessNumber, guess, width }) {
         } else {
             setGuessBarClasses(classNames + ` ${styles.default}`);
         }
-    }, [endGameGuessNumber, guessNumber]);
+    }, [endGameGuessNumber, guessNumber, styles]);
 
 
     return (

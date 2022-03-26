@@ -1,3 +1,5 @@
+@import url('../index.css');
+
 .guessSquare {
     text-align: center;
     display: flex;
@@ -6,7 +8,7 @@
     padding: 20px;
     margin: 3px;
     font-size: 30px;
-    border: solid 2px #6f05b6;
+    border: solid 2px var(--lighter-purple);
     border-radius: 5px;
     width: 64px;
     height: 64px;
@@ -14,14 +16,16 @@
 }
 
 .inCorrectSpot {
-    background-color: rgb(10, 165, 10);
+    background-color: var(--game-green);
+    border: var(--game-green);
 }
 
 .isInWord {
-    /* background-color: rgb(136, 117, 32); */
-    background-color: #b99c18;
+    background-color:  var(--game-yellow);
+    border: var(--game-yellow);
 }
 
 .notInWord {
-    background-color: rgb(24, 23, 23);
+    background-color:  var(--game-black);
+    border: var(--game-black);
 }

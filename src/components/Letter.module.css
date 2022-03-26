@@ -17,12 +17,15 @@
 
 .inCorrectSpot {
     background-color: var(--game-green);
+    border: var(--game-green);
 }
 
 .isInWord {
     background-color: var(--game-yellow);
+    border: var(--game-yellow);
 }
 
 .notInWord {
     background-color: var(--game-black);
+    border: var(--game-black);
 }
