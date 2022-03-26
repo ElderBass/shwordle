@@ -30,14 +30,28 @@ html {
   height: 100vh;
   width: 100vw;
   background-color: var(--background-purple);
+  overflow: hidden;
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px calc(100vh - 70px);
+  grid-template-areas: 
+    "header"
+    "game";
+  justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
   color:rgb(220, 255, 225);
   padding-bottom: 15px;
+}
+
+.game {
+  grid-area: game;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 100%;
 }

@@ -25,7 +25,12 @@ function EnterButton({ answerWord, wordPool }) {
     if (checkForLauraMode(currentGuessWord)) {
       return;
     }
-    if (currentGuess.length < 5 || !wordPool.includes(currentGuessWord)) return;
+    if (currentGuess.length < 5) return;
+
+    if(!wordPool.includes(currentGuessWord)) {
+      dispatch(GuessActions.notInWordList(true));
+      return;
+    }
 
     const comparisonResults = compareGuessWithAnswer(currentGuess, answerWord);
     const isWin = isWinningGuess(comparisonResults, answerWord);
