@@ -1,7 +1,6 @@
 @import url('../index.css');
 
 .deleteBtn {
-  flex: 1 0 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +9,7 @@
   padding: 18px 15px;
   border: solid 2px var(--lighter-purple);
   margin: 5px;
-  min-width: 70px;
+  width: 80px;
   border-radius: 8px;
 }
 

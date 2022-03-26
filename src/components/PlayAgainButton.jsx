@@ -4,6 +4,7 @@ import * as GameOverActions from '../store/actions/gameOver';
 import styles from './PlayAgainButton.module.css';
 
 function PlayAgainButton() {
+    // eslint-disable-next-line no-unused-vars
     const [state, dispatch] = useGameContext();
 
     const onClick = async () => {

@@ -1,6 +1,8 @@
 .guessBlockContainer {
-    margin: 20px auto;
+    flex: 1 0 auto;
+    margin: auto;
     width: 60%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

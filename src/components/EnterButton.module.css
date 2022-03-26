@@ -1,19 +1,20 @@
+@import url('../index.css');
+
 .enterBtn {
-    flex: 1 0 45%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
     text-align: center;
     padding: 18px 15px;
-    border: solid 2px #6f05b6;
+    border: solid 2px var(--lighter-purple);
     margin: 5px;
-    min-width: 70px;
+    width: 80px;
     border-radius: 8px;
 }
 
 .fullLetters {
-    background-color: #ec3bf2;
+    background-color: var(--hot-pink);
 }
 
 .disabled {
@@ -28,5 +29,7 @@
   cursor: pointer;
   color: white;
   font-weight: 500;
-  background-color: rgb(10, 165, 10);
+  background-color: var(--game-green);
+  border: solid 2px var(--game-green);
+
 }

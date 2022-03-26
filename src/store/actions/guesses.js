@@ -16,6 +16,12 @@ const guessWord = (comparisonResults) => ({
     payload: comparisonResults,
 });
 
+const NOT_IN_WORD_LIST = 'NOT_IN_WORD_LIST';
+const notInWordList = (payload) => ({
+    type: NOT_IN_WORD_LIST,
+    payload,
+});
+
 const END_GAME = 'END_GAME';
 const endGame = (letters) => ({
     type: END_GAME,
@@ -29,6 +35,8 @@ export {
     deleteLetter,
     GUESS_WORD,
     guessWord,
+    NOT_IN_WORD_LIST,
+    notInWordList,
     END_GAME,
     endGame,
 };

@@ -13,7 +13,7 @@ import LauraModal from './components/LauraModal';
 
 function App() {
     const [state, dispatch] = useGameContext();
-    const { showStatsModal, showLauraModal } = state;
+    const { showStatsModal, showLauraModal, notInWordList, currentGuess } = state;
 
     const [solution, setSolution] = useState(null);
     const [wordPool, setWordPool] = useState([]);
@@ -96,8 +96,14 @@ function App() {
             {showLauraModal && <LauraModal />}
             {showStats && <StatsModal answerWord={solution} />}
             <Header />
-            <GuessBlock answerWord={solution} />
-            <Keyboard answerWord={solution} wordPool={wordPool} />
+            <div className="game">
+                <GuessBlock
+                    answerWord={solution}
+                    guessWord={currentGuess.join('')}
+                    notInWordList={notInWordList}
+                />
+                <Keyboard answerWord={solution} wordPool={wordPool} />
+            </div>
         </div>
     );
 }

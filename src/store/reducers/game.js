@@ -20,6 +20,7 @@ export const INITIAL_GAME_STATE = {
     playerStats: {},
     lauraMode: false,
     showLauraModal: false,
+    notInWordList: false,
 };
 
 const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
@@ -46,6 +47,12 @@ const gameReducer = (state = INITIAL_GAME_STATE, { type, payload }) => {
                 previousGuesses: [...state.previousGuesses, guessObj],
                 currentGuess: [],
                 letters: updateLettersArray(state.letters, payload),
+            };
+            break;
+        case GuessActions.NOT_IN_WORD_LIST:
+            newState = {
+                ...state,
+                notInWordList: payload,
             };
             break;
         case GuessActions.END_GAME:

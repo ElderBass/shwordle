@@ -1,0 +1,13 @@
+@import url('../index.css');
+
+.notInWordContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    margin-top: -20px;
+}
+
+.erroneousWord {
+    color: var(--hot-pink)
+}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { useGameContext } from '../store/GameState';
 import Letter from './Letter';
-import Toolbar from './Toolbar';
 import styles from './Keyboard.module.css';
+import EnterButton from './EnterButton';
+import DeleteButton from './DeleteButton';
 
 function Keyboard({ answerWord, wordPool }) {
     const [state] = useGameContext();
@@ -11,17 +12,24 @@ function Keyboard({ answerWord, wordPool }) {
     return (
         <div className={styles.keyboardContainer}>
             <div className={styles.lettersContainer}>
-                {letters.map(letter => (
-                    <Letter
-                        key={letter.value}
-                        value={letter.value}
-                        answerWord={answerWord}
-                        inWord={letter.isInWord}
-                        correctSpot={letter.inCorrectSpot}
-                    />
-                ))}
+                {letters.map(letter => {
+                    if (letter.value === 'enter') {
+                        return <EnterButton answerWord={answerWord} wordPool={wordPool} />;
+                    } else if (letter.value === 'delete') {
+                        return <DeleteButton />;
+                    } else {
+                        return(
+                            <Letter
+                                key={letter.value}
+                                value={letter.value}
+                                answerWord={answerWord}
+                                inWord={letter.isInWord}
+                                correctSpot={letter.inCorrectSpot}
+                            />
+                        );
+                    }
+                })}
             </div>
-            <Toolbar answerWord={answerWord} wordPool={wordPool} />
         </div>
     );
 }
