@@ -2,29 +2,40 @@ import React from 'react';
 import { useGameContext } from '../store/GameState';
 import Letter from './Letter';
 import styles from './Keyboard.module.css';
-import EnterButton from './EnterButton';
-import DeleteButton from './DeleteButton';
+import ActionButton from './ActionButton';
 
-function Keyboard({ answerWord, wordPool }) {
+function Keyboard({ answerWord, onGuessWord, onLetterClick, onDelete }) {
     const [state] = useGameContext();
     const { letters } = state;
+
+    const ACTION_PROPS = {
+        Enter: {
+            onClick: onGuessWord,
+            styles: styles.enterBtn,
+            text: 'Enter',
+        },
+        Backspace: {
+            onClick: onDelete,
+            styles: styles.deleteBtn,
+            text: 'Delete',
+        },
+    };
 
     return (
         <div className={styles.keyboardContainer}>
             <div className={styles.lettersContainer}>
-                {letters.map(letter => {
-                    if (letter.value === 'enter') {
-                        return <EnterButton answerWord={answerWord} wordPool={wordPool} />;
-                    } else if (letter.value === 'delete') {
-                        return <DeleteButton />;
+                {letters.map((letter) => {
+                    if (letter.value === 'Enter' || letter.value === 'Backspace') {
+                        return <ActionButton key={letter.value} {...ACTION_PROPS[letter.value]} />;
                     } else {
-                        return(
+                        return (
                             <Letter
                                 key={letter.value}
                                 value={letter.value}
                                 answerWord={answerWord}
                                 inWord={letter.isInWord}
                                 correctSpot={letter.inCorrectSpot}
+                                onLetterClick={onLetterClick}
                             />
                         );
                     }

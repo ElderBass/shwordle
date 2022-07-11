@@ -48,6 +48,10 @@ html {
   padding-bottom: 15px;
 }
 
+.App:focus {
+  outline: none;
+}
+
 .game {
   grid-area: game;
   display: flex;
