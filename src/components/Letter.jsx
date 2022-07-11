@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useGameContext } from '../store/GameState';
-import * as GuessActions from '../store/actions/guesses';
 import styles from './Letter.module.css';
 
 function Letter(props) {
-    const { value, inWord, correctSpot } = props;
+    const { value, inWord, correctSpot, onLetterClick } = props;
     const [classes, setClasses] = useState('');
-    const [state, dispatch] = useGameContext();
-    const { currentGuess, guessedLetters, isGameOver } = state;
+    const [state] = useGameContext();
+    const { guessedLetters } = state;
 
     useEffect(() => {
         let classNames = styles.letter;
@@ -26,19 +25,8 @@ function Letter(props) {
     }, [inWord, correctSpot, guessedLetters, value]);
 
 
-    function addLetterToGuess() {
-        if (isGameOver) return;
-        if (currentGuess.length === 5) {
-            alert('You can\'t guess any more letters, bro.');
-            return;
-        }
-        const guess = currentGuess;
-        guess.push(value);
-        dispatch(GuessActions.addLetter(guess));
-    }
-
     return (
-        <div className={classes} onClick={addLetterToGuess}>
+        <div className={classes} onClick={onLetterClick}>
             {value}
         </div>
     );

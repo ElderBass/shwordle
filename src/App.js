@@ -1,19 +1,35 @@
 import Header from './components/Header';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import wordListJson from 'word-list-json';
 import randomWords from 'random-words';
-import GuessBlock from './components/GuessBoard';
-import Keyboard from './components/Keyboard';
 import * as StatsActions from './store/actions/stats';
 import * as LauraActions from './store/actions/laura';
+import * as GuessActions from './store/actions/guesses';
+import * as ModalActions from './store/actions/modal';
 import { useGameContext } from './store/GameState';
 import { STATS_STORAGE_KEY } from './consts';
+import { getPressedKey } from './utils/getPressedKey';
+import { compareGuessWithAnswer, isWinningGuess } from './utils/guessingUtils';
+import { getEndGameAlertMessage, setPlayerStats } from './utils/gameOverUtils';
+import GuessBlock from './components/GuessBoard';
+import Keyboard from './components/Keyboard';
 import StatsModal from './components/StatsModal';
 import LauraModal from './components/LauraModal';
 
 function App() {
+    const appRef = useRef(null);
+
     const [state, dispatch] = useGameContext();
-    const { showStatsModal, showLauraModal, notInWordList, currentGuess } = state;
+    const {
+        showStatsModal,
+        showLauraModal,
+        notInWordList,
+        previousGuesses,
+        currentGuess,
+        guessNumber,
+        lauraMode,
+        isGameOver,
+    } = state;
 
     const [solution, setSolution] = useState(null);
     const [wordPool, setWordPool] = useState([]);
@@ -43,13 +59,16 @@ function App() {
     }
 
     useEffect(() => {
-        const lauraMode = localStorage.getItem('lauraMode') && localStorage.getItem('lauraMode');
-        if (lauraMode && lauraMode === 'true') {
-            dispatch(LauraActions.setLauraMode(true));
+        if (appRef.current) {
+            appRef.current.focus();
         }
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
+        const isLauraMode = localStorage.getItem('lauraMode') && localStorage.getItem('lauraMode');
+        if (isLauraMode && isLauraMode === 'true') {
+            dispatch(LauraActions.setLauraMode(true));
+        }
         if (!localStorage.getItem(STATS_STORAGE_KEY)) {
             localStorage.setItem(
                 STATS_STORAGE_KEY,
@@ -91,8 +110,75 @@ function App() {
         }
     }, [showStatsModal]);
 
+    function addLetterToGuess(guessedLetter) {
+        if (isGameOver || currentGuess.length === 5) return;
+
+        const guess = currentGuess;
+        guess.push(guessedLetter);
+        dispatch(GuessActions.addLetter(guess));
+    }
+
+    function checkForLauraMode(guessWord) {
+        if (guessNumber === 2 && guessWord === 'TREBE') {
+            if (previousGuesses[0].guess.join('') === 'LAURA') {
+                dispatch(LauraActions.setLauraMode(true));
+                return true;
+            }
+        }
+    }
+
+    async function guessWordHandler() {
+        const currentGuessWord = currentGuess.join('');
+        if (checkForLauraMode(currentGuessWord)) {
+            return;
+        }
+        if (currentGuess.length < 5) return;
+
+        if (!wordPool.includes(currentGuessWord)) {
+            dispatch(GuessActions.notInWordList(true));
+            return;
+        }
+
+        const comparisonResults = compareGuessWithAnswer(currentGuess, solution);
+        const isWin = isWinningGuess(comparisonResults, solution);
+
+        if (isWin || guessNumber === 6) {
+            setPlayerStats({ isWin, numberOfGuesses: guessNumber, answerWord: solution });
+            await dispatch(GuessActions.endGame({ isWin, comparisonResults }));
+
+            const endMessage = getEndGameAlertMessage(guessNumber, isWin, lauraMode);
+            await dispatch(ModalActions.setEndGameMessage(endMessage));
+            await dispatch(ModalActions.setEndGameGuessNumber(guessNumber));
+            await dispatch(ModalActions.toggleShowStatsModal(true));
+        } else {
+            await dispatch(GuessActions.guessWord(comparisonResults));
+        }
+    }
+
+    function handleDeleteLetter() {
+        if (currentGuess.length === 0) return;
+        if (currentGuess.length === 5 && notInWordList) {
+          dispatch(GuessActions.notInWordList(false));
+        }
+        const updatedGuess = currentGuess;
+        updatedGuess.pop();
+        dispatch(GuessActions.deleteLetter(updatedGuess));
+      }
+
+    const onKeyDown = (e) => {
+        const keyPressPayload = getPressedKey(e.code);
+        if (keyPressPayload.isEnterKey) {
+            guessWordHandler();
+        } else if (keyPressPayload.isDeleteKey) {
+            handleDeleteLetter();
+        }
+        else if (keyPressPayload.isLetter) {
+            addLetterToGuess(keyPressPayload.letter);
+        }
+    };
+
     return (
-        <div className="App">
+        <div ref={appRef} tabIndex="0" onKeyDown={onKeyDown} className="App">
             {showLauraModal && <LauraModal />}
             {showStats && <StatsModal answerWord={solution} />}
             <Header />
@@ -102,7 +188,12 @@ function App() {
                     guessWord={currentGuess.join('')}
                     notInWordList={notInWordList}
                 />
-                <Keyboard answerWord={solution} wordPool={wordPool} />
+                <Keyboard
+                    onGuessWord={guessWordHandler}
+                    answerWord={solution}
+                    onLetterClick={addLetterToGuess}
+                    onDelete={handleDeleteLetter}
+                />
             </div>
         </div>
     );

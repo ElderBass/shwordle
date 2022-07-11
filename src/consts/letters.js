@@ -18,7 +18,7 @@ export const letters = [
   { value: "J", isInWord: false, inCorrectSpot: false },
   { value: "K", isInWord: false, inCorrectSpot: false },
   { value: "L", isInWord: false, inCorrectSpot: false },
-  { value: 'enter' },
+  { value: 'Enter' },
   { value: "Z", isInWord: false, inCorrectSpot: false },
   { value: "X", isInWord: false, inCorrectSpot: false },
   { value: "C", isInWord: false, inCorrectSpot: false },
@@ -26,5 +26,5 @@ export const letters = [
   { value: "B", isInWord: false, inCorrectSpot: false },
   { value: "N", isInWord: false, inCorrectSpot: false },
   { value: "M", isInWord: false, inCorrectSpot: false },
-  { value: 'delete' }
+  { value: 'Backspace' }
 ];
