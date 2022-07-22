@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { STATS_STORAGE_KEY } from '../consts';
 import { useGameContext } from '../store/GameState';
 
 function GuessDistributionRow({ styles, guessNumber, guess, width }) {
@@ -8,7 +9,10 @@ function GuessDistributionRow({ styles, guessNumber, guess, width }) {
 
     useEffect(() => {
         const classNames = styles.guessBar;
-        if (parseInt(endGameGuessNumber) === guessNumber) {
+        const { previousGuessNumber } = JSON.parse(localStorage.getItem(STATS_STORAGE_KEY));
+
+        const highlightedGuessNmber = previousGuessNumber || endGameGuessNumber;
+        if (parseInt(highlightedGuessNmber) === guessNumber) {
             setGuessBarClasses(classNames + ` ${styles.green}`);
         } else {
             setGuessBarClasses(classNames + ` ${styles.default}`);
