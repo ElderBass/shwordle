@@ -26,7 +26,7 @@ function Letter(props) {
 
 
     return (
-        <div className={classes} onClick={onLetterClick}>
+        <div className={classes} onClick={() => onLetterClick(value)}>
             {value}
         </div>
     );
